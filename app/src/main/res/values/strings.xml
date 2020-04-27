@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">智能街道</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">电子邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">注册账号</string>
+    <string name="forget_passwd">忘记密码</string>
+    <string name="login">登录</string>
+    <string name="back_login">返回登录</string>
+    <string name="usersname">用户名</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"欢迎 !"</string>
+    <string name="invalid_username">用户名不能为空</string>
+    <string name="invalid_password">密码至少大于5位</string>
+    <string name="login_failed">"登录失败"</string>
+    <string name="login_success">"登录成功"</string>
+    <string name="registered_success">注册成功</string>
+    <string name="registered_failed">注册失败</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Handsome CJW</string>
+    <string name="nav_header_subtitle">潮男嘉旺现已上线</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">设置</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="value_famer_name">陈嘉旺的农场</string>
+    <string name="value_humidity_title">环境湿度比：</string>
+    <string name="devices_number">区域编号：</string>
+    <string name="devices_name">区域名称：</string>
+    <string name="devices_status">当前状态：</string>
+    <string name="detail">详细信息：</string>
+    <string name="patrol_record">巡更记录</string>
+    <string name="cellar_cover">窖井盖</string>
+    <string name="important_place">重要场所</string>
+    <string name="fire_equipment">消防设备</string>
+    <string name="now_street">当前街道：</string>
+    <string name="body_temp">体感温度:</string>
+    <string name="air_him">空气湿度:</string>
+    <string name="air_pm">PM2.5:</string>
+    <string name="search">搜索</string>
+    <string name="large_text">
+        "这是一个快乐的农场，里面生活着喜羊羊美羊羊和小猪佩奇一家，特别是快乐的喜羊羊，每天都有新的想法，而小猪佩奇是他们最可爱的宝贝。"
+    </string>
+    <string name="worker_name">工作人员</string>
+    <string name="work_date">工作日</string>
+    <string name="patrol_data_title">治安巡更工作出勤轨迹</string>
+    <string name="way_header">巡更工作轨迹</string>
+    <string name="data_header">日期</string>
+    <string name="worker_header">工作人员</string>
+    <string name="cover_data_title">窖井盖数据检测</string>
+    <string name="important_data_title">重要场所数据检测</string>
+    <string name="cover_data_waring_title">预警提示</string>
+    <string name="important_data_waring_title">预警提示</string>
+    <string name="address">地址</string>
+    <string name="status">状态</string>
+    <string name="fix">处理</string>
+    <string name="temperature">温度</string>
+    <string name="humidity">湿度</string>
+    <string name="air_smoke">烟雾浓度</string>
+</resources>

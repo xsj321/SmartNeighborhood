@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="basic_setting">基础设置</string>
+    <string name="open_up_bright_themes">开启亮色风格</string>
+    <string name="ip_addr">当前服务器地址</string>
+</resources>

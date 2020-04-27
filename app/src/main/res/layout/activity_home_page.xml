@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.Home.HomePage"
+    android:background="@drawable/homepage_background"
+    android:orientation="vertical"
+    >
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/PureWhite"
+        >
+        <FrameLayout
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/app_name"
+                android:fontFamily="@font/fangzheng"
+                android:textSize="24dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="right|center_vertical"
+                >
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/localtion_icon"
+                    android:layout_marginRight="8dp"/>
+                <TextView
+                    android:id="@+id/now_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="金凤区" />
+            </LinearLayout>
+
+
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="48dp"
+            android:background="@color/PureWhite"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:orientation="vertical"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/body_temp"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/fangzheng"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    >
+                    <TextView
+                        android:id="@+id/body_temp"
+                        android:layout_width="0dp"
+                        style="@style/watcher"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        tools:text="25"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        style="@style/watcher"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="℃"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/air_him"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/fangzheng"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    >
+                    <TextView
+                        android:id="@+id/now_him"
+                        android:layout_width="0dp"
+                        style="@style/watcher"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        tools:text="68"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        style="@style/watcher"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="%"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/air_pm"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/fangzheng"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    >
+                    <TextView
+                        android:id="@+id/now_pm"
+                        android:layout_width="0dp"
+                        style="@style/watcher"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        tools:text="优"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/patrol_button"
+            android:background="@drawable/homepage_button_background"
+            style="@style/homepage_button"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/homepage_button_text"
+                >
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="18.67dp"
+                    android:src="@drawable/waring"
+                    android:layout_marginRight="16dp"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    style="@style/homepage_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/patrol_record" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cover_button"
+            style="@style/homepage_button"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/homepage_button_background">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/homepage_button_text"
+                >
+                <ImageView
+                    android:id="@+id/cover_waring"
+                    android:layout_width="20dp"
+                    android:layout_height="18.67dp"
+                    android:src="@drawable/waring"
+                    android:layout_marginRight="16dp"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    style="@style/homepage_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cellar_cover" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/important_button"
+            style="@style/homepage_button"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/homepage_button_background">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/homepage_button_text"
+                >
+                <ImageView
+                    android:id="@+id/important_waring"
+                    android:layout_width="20dp"
+                    android:layout_height="18.67dp"
+                    android:src="@drawable/waring"
+                    android:layout_marginRight="16dp"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    style="@style/homepage_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/important_place" />
+            </LinearLayout>
+        </FrameLayout>
+
+
+
+
+    </LinearLayout>
+</LinearLayout>

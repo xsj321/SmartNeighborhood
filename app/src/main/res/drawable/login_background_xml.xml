@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/PureWhite"></solid>
+        </shape>
+    </item>
+    <item android:width="360dp" android:height="310.67dp">
+        <bitmap android:src="@drawable/login_background" ></bitmap>
+    </item>
+    <item  android:width="228dp" android:height="36.67dp" android:gravity="center_horizontal" android:top="66dp">
+        <bitmap android:src="@drawable/login_title"  ></bitmap>
+    </item>
+
+</layer-list>
