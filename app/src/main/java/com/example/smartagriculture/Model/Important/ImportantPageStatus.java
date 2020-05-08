@@ -1,4 +1,6 @@
-package com.example.smartagriculture.Model;
+package com.example.smartagriculture.Model.Important;
+
+import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 
 import java.util.ArrayList;
 

@@ -19,7 +19,7 @@ import com.example.smartagriculture.View.Important.ImportantDataActivity;
 import com.example.smartagriculture.View.Patrol.PatrolDataActivity;
 import com.example.smartagriculture.Service.HomePageLoader;
 import com.example.smartagriculture.R;
-import com.example.smartagriculture.Model.HomePageStatus;
+import com.example.smartagriculture.Model.HomePage.HomePageStatus;
 
 public class HomePage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<HomePageStatus> {
 

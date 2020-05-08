@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.smartagriculture.Model.ImportantDataListItem;
+import com.example.smartagriculture.Model.Important.ImportantDataListItem;
 import com.example.smartagriculture.R;
 
 import java.util.ArrayList;

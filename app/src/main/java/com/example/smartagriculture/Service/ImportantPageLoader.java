@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 
-import com.example.smartagriculture.Model.ImportantPageStatus;
+import com.example.smartagriculture.Model.Important.ImportantPageStatus;
 
 import org.json.JSONException;
 
@@ -38,6 +38,7 @@ public class ImportantPageLoader extends AsyncTaskLoader<ImportantPageStatus> {
         ImportantPageStatus importantPageStatus = null;
         try {
             importantPageStatus = util.getImportantData(location, user);
+            util.getCoverData(location,user);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

@@ -14,7 +14,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.smartagriculture.View.CustomViews.DataTable;
-import com.example.smartagriculture.Model.PatrolDataListItem;
+import com.example.smartagriculture.Model.Patrol.PatrolDataListItem;
 import com.example.smartagriculture.R;
 
 import java.util.ArrayList;

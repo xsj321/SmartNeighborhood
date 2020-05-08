@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.smartagriculture.Model.PatrolDataListItem;
+import com.example.smartagriculture.Model.Patrol.PatrolDataListItem;
 import com.example.smartagriculture.R;
 
 import java.util.ArrayList;

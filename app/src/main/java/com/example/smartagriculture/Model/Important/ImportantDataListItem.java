@@ -1,4 +1,4 @@
-package com.example.smartagriculture.Model;
+package com.example.smartagriculture.Model.Important;
 
 public class ImportantDataListItem {
     private Integer id;

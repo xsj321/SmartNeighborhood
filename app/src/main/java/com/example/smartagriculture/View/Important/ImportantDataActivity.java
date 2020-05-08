@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 import com.example.smartagriculture.View.CustomViews.DataTable;
 import com.example.smartagriculture.Service.ImportantPageLoader;
 import com.example.smartagriculture.R;
-import com.example.smartagriculture.Model.ImportantPageStatus;
+import com.example.smartagriculture.Model.Important.ImportantPageStatus;
 
 public class ImportantDataActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ImportantPageStatus> {
     private SearchView mSearchView;

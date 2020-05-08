@@ -1,4 +1,4 @@
-package com.example.smartagriculture.Model;
+package com.example.smartagriculture.Model.Cover;
 
 public class CoverDataListItem {
     private Integer id;

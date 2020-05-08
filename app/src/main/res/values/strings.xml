@@ -37,7 +37,7 @@
     <string name="devices_status">当前状态：</string>
     <string name="detail">详细信息：</string>
     <string name="patrol_record">巡更记录</string>
-    <string name="cellar_cover">窖井盖</string>
+    <string name="cellar_cover">窨井盖</string>
     <string name="important_place">重要场所</string>
     <string name="fire_equipment">消防设备</string>
     <string name="now_street">当前街道：</string>
@@ -54,7 +54,7 @@
     <string name="way_header">巡更工作轨迹</string>
     <string name="data_header">日期</string>
     <string name="worker_header">工作人员</string>
-    <string name="cover_data_title">窖井盖数据检测</string>
+    <string name="cover_data_title">窨井盖数据检测</string>
     <string name="important_data_title">重要场所数据检测</string>
     <string name="cover_data_waring_title">预警提示</string>
     <string name="important_data_waring_title">预警提示</string>

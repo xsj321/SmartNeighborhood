@@ -1,4 +1,4 @@
-package com.example.smartagriculture.Model;
+package com.example.smartagriculture.Model.Patrol;
 
 
 public class PatrolDataListItem {
