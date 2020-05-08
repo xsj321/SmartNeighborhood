@@ -1,5 +1,10 @@
 package com.example.smartagriculture.View.Cover;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -13,16 +18,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.example.smartagriculture.Model.Cover.CoverPageStatus;
+import com.example.smartagriculture.Model.Important.ImportantPageStatus;
+import com.example.smartagriculture.Service.CoverPageLoader;
 import com.example.smartagriculture.View.CustomViews.DataTable;
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.R;
+import com.example.smartagriculture.View.Important.ImportantDataAdapter;
+import com.example.smartagriculture.View.Important.ImportantWaringAdapter;
 
 import java.util.ArrayList;
 
-public class CoverDataActivity extends AppCompatActivity {
+public class CoverDataActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<CoverPageStatus>{
 
     private SearchView mSearchView;
     private DataTable rootLayout;
+    private String NowUserName;
     public static final ArrayList<CoverDataListItem> datlist =  new ArrayList<>();
     public static final ArrayList<CoverDataListItem> list_waring = new ArrayList<>();
     @Override
@@ -34,6 +45,8 @@ public class CoverDataActivity extends AppCompatActivity {
         window.setStatusBarColor(getResources().getColor(R.color.PureWhite));
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        Intent intent = getIntent();
+        this.NowUserName = intent.getStringExtra("user_name");
         rootLayout = findViewById(R.id.cover_root);
         rootLayout.setPageTitle("窖井盖");
         rootLayout.getDataTitleView().setText(getResources().getText(R.string.cover_data_title));
@@ -44,8 +57,8 @@ public class CoverDataActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setTitle(null);
-
-        {
+        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
+        /*{
             datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
             datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
             datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
@@ -61,20 +74,19 @@ public class CoverDataActivity extends AppCompatActivity {
             datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
             datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
 
-        }
+        }*/
 
-        {
+        /*{
             list_waring.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
             list_waring.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
             list_waring.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
-        }
+        }*/
 
-        RecyclerView recyclerView = rootLayout.getListView();
-        recyclerView.setAdapter(new CoverDataAdapter(datlist));
-        RecyclerView recyclerView_waring = rootLayout.getWaningListView();
-        recyclerView_waring.setAdapter(new CoverWaringAdapter(list_waring));
-        LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.cover_data_list_header,null,false );
-        rootLayout.setHeader(view);
+//        RecyclerView recyclerView = rootLayout.getListView();
+//        recyclerView.setAdapter(new CoverDataAdapter(datlist));
+//        RecyclerView recyclerView_waring = rootLayout.getWaningListView();
+//        recyclerView_waring.setAdapter(new CoverWaringAdapter(list_waring));
+
 
 
     }
@@ -117,5 +129,33 @@ public class CoverDataActivity extends AppCompatActivity {
 
     private final void finshThis(){
         finish();
+    }
+
+    @NonNull
+    @Override
+    public Loader<CoverPageStatus> onCreateLoader(int i, @Nullable Bundle bundle) {
+        return new CoverPageLoader(this,"东光街道",NowUserName);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<CoverPageStatus> loader, CoverPageStatus coverPageStatus) {
+        if (coverPageStatus.getWaring()){
+            //如果存在警告显示警告列表
+            rootLayout.setWarningBoxVisibility(true);
+            RecyclerView recyclerView_waring = rootLayout.getWaningListView();
+            //获取警告列表
+            recyclerView_waring.setAdapter(new CoverWaringAdapter(coverPageStatus.getWaringList()));
+        }
+        RecyclerView recyclerView = rootLayout.getListView();
+        //设置数据列表
+        recyclerView.setAdapter(new CoverDataAdapter(coverPageStatus.getDataList()));
+        //设置表头
+        LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.cover_data_list_header,null,false );
+        rootLayout.setHeader(view);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<CoverPageStatus> loader) {
+
     }
 }

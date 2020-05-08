@@ -21,6 +21,8 @@ import com.example.smartagriculture.Service.HomePageLoader;
 import com.example.smartagriculture.R;
 import com.example.smartagriculture.Model.HomePage.HomePageStatus;
 
+import static java.lang.Thread.sleep;
+
 public class HomePage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<HomePageStatus> {
 
     private FrameLayout PatrolButton,CoverButton,ImportantButton;
@@ -97,6 +99,12 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
         else CoverIMG.setVisibility(View.GONE);
         if (homePageStatus.getImportant())ImportantIMG.setVisibility(View.VISIBLE);
         else ImportantIMG.setVisibility(View.GONE);
+        try {
+            sleep(10000);
+            getSupportLoaderManager().initLoader(Math.toIntExact(System.currentTimeMillis()),null,this).forceLoad();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

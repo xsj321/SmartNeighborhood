@@ -42,8 +42,9 @@ public class DataRequestUtil {
      * @throws JSONException
      */
     HomePageStatus getHomePageData(String location, String user) throws IOException, JSONException {
-        JSONObject respond = request("home_page", user, location).getJSONObject("respond");
-        if (respond == null) return null;
+        JSONObject respondFromNet = request("home_page", user, location);
+        if (respondFromNet == null) return null;
+        JSONObject respond = respondFromNet.getJSONObject("respond");
         JSONObject info = respond.getJSONObject("info");
         JSONObject locaion = respond.getJSONObject("locaion");
         JSONObject environment = respond.getJSONObject("environment");
