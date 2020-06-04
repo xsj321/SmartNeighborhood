@@ -32,6 +32,9 @@ import com.example.smartagriculture.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.Properties;
+
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
 
     private LoginViewModel loginViewModel;
@@ -39,8 +42,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     private String Account;
     private String Password;
     private String UserName;
-    private String IP = "101.37.86.133";
-    private int PORT = 8123;
+    private String address;
+    private int port;
     private EditText usernameEditText;
     private EditText passwordEditText;
     private EditText theusernameEditText;
@@ -64,6 +67,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         final TextView toolBarButton = findViewById(R.id.toolbar_button);
         setAndroidNativeLightStatusBar(this,true);
+        Properties properties  = new Properties();
+        try {
+            properties.load(this.getAssets().open("server_settings.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        address = properties.getProperty("request_add");
+        String request_port = properties.getProperty("request_port");
+        Log.d("请求地址",address);
+        port = Integer.parseInt(request_port);
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -189,8 +202,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             Log.d("读取的字符串为：",usernameEditText.getText().toString()+"  "+passwordEditText.getText().toString());
             return new LoginAndRegisterLoader(
                     this,
-                    IP,
-                    PORT,
+                    address,
+                    port,
                     usernameEditText.getText().toString(),
                     passwordEditText.getText().toString(),
                     nowMode
@@ -200,8 +213,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             Log.d("读取的字符串为：",usernameEditText.getText().toString()+"  "+passwordEditText.getText().toString());
             return new LoginAndRegisterLoader(
                     this,
-                    IP,
-                    PORT,
+                    address,
+                    port,
                     usernameEditText.getText().toString(),
                     passwordEditText.getText().toString(),
                     theusernameEditText.getText().toString(),
@@ -216,15 +229,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         final String LoginError = "login_error";
         final String RegError = "reg_error";
         final String RegSucceed = "reg_succeed";
-        String result = LoginError;
+        String result = s;
         String userName = "未知";
-        try {
-            JSONObject jsonObject = new JSONObject(s);
-            result = jsonObject.getString("result");
-            userName = jsonObject.getString("user_name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Log.e("返回的数据",s);
 
         //登录成功
         if (result.equals(LoginSucceed)){

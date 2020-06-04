@@ -84,7 +84,7 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
     @Override
     public Loader<HomePageStatus> onCreateLoader(int i, @Nullable Bundle bundle) {
         // TODO: 2020/4/21 0021 记得修改占位符
-        return new HomePageLoader(this,"北京",NowUserName);
+        return new HomePageLoader(this,"四川省成都市锦江区东光街道",NowUserName);
     }
 
     @Override
@@ -99,12 +99,7 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
         else CoverIMG.setVisibility(View.GONE);
         if (homePageStatus.getImportant())ImportantIMG.setVisibility(View.VISIBLE);
         else ImportantIMG.setVisibility(View.GONE);
-        try {
-            sleep(10000);
-            getSupportLoaderManager().initLoader(Math.toIntExact(System.currentTimeMillis()),null,this).forceLoad();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override

@@ -10,12 +10,17 @@ import android.widget.TextView;
 
 import com.example.smartagriculture.Model.Important.ImportantDataListItem;
 import com.example.smartagriculture.R;
+import com.example.smartagriculture.Service.DataRequestUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ImportantDataAdapter extends RecyclerView.Adapter<ImportantDataAdapter.ViewHolder> {
 
     private ArrayList<ImportantDataListItem> list;
+
+    private String  IP;
+    private int Port;
 
     public ImportantDataAdapter(ArrayList<ImportantDataListItem> list) {
         this.list = list;
@@ -35,7 +40,6 @@ public class ImportantDataAdapter extends RecyclerView.Adapter<ImportantDataAdap
             humidity = itemView.findViewById(R.id.important_humidity);
             air = itemView.findViewById(R.id.important_air);
             Status = itemView.findViewById(R.id.important_status);
-
         }
     }
 
@@ -51,6 +55,8 @@ public class ImportantDataAdapter extends RecyclerView.Adapter<ImportantDataAdap
         ImportantDataListItem nowItem = list.get(i);
         String status = list.get(i).getStatus();
         String airString =  list.get(i).getAir();
+
+
         viewHolder.address.setText(nowItem.getAddress());
         viewHolder.temperature.setText(nowItem.getTemperature());
         viewHolder.humidity.setText(nowItem.getHumidity());

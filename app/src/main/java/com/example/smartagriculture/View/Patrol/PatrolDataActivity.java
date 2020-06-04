@@ -1,5 +1,10 @@
 package com.example.smartagriculture.View.Patrol;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -13,16 +18,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.example.smartagriculture.Model.Important.ImportantPageStatus;
+import com.example.smartagriculture.Model.Patrol.PatrolPageStatus;
+import com.example.smartagriculture.Service.PatrolPageLoader;
 import com.example.smartagriculture.View.CustomViews.DataTable;
 import com.example.smartagriculture.Model.Patrol.PatrolDataListItem;
 import com.example.smartagriculture.R;
+import com.example.smartagriculture.View.Important.ImportantDataAdapter;
+import com.example.smartagriculture.View.Important.ImportantWaringAdapter;
 
 import java.util.ArrayList;
 
-public class PatrolDataActivity extends AppCompatActivity {
+public class PatrolDataActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<PatrolPageStatus>{
 
     private SearchView mSearchView;
     private DataTable rootLayout;
+    private String NowUserName;
     public static final ArrayList<PatrolDataListItem> datlist =  new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +48,15 @@ public class PatrolDataActivity extends AppCompatActivity {
         rootLayout.setPageTitle("巡逻记录");
         rootLayout.getDataTitleView().setText(getResources().getText(R.string.patrol_data_title));
         Toolbar  toolbar = rootLayout.getToolbar();
+        Intent intent = getIntent();
+        this.NowUserName = intent.getStringExtra("user_name");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setTitle(null);
+        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
 
-        {
+       /* {
             datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
             datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
             datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
@@ -62,7 +76,7 @@ public class PatrolDataActivity extends AppCompatActivity {
         RecyclerView recyclerView = rootLayout.getListView();
         recyclerView.setAdapter(new PatrolDataAdapter(datlist));
         LinearLayout view= (LinearLayout)LayoutInflater.from(this).inflate(R.layout.patrol_data_list_header,null,false );
-        rootLayout.setHeader(view);
+        rootLayout.setHeader(view);*/
     }
 
     @Override
@@ -103,5 +117,29 @@ public class PatrolDataActivity extends AppCompatActivity {
 
     private final void finshThis(){
         finish();
+    }
+
+    @NonNull
+    @Override
+    public Loader<PatrolPageStatus> onCreateLoader(int i, @Nullable Bundle bundle) {
+        return new PatrolPageLoader(this,"东光街道",NowUserName);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<PatrolPageStatus> loader, PatrolPageStatus patrolPageStatus) {
+        if (patrolPageStatus  == null){
+            return;
+        }
+        RecyclerView recyclerView = rootLayout.getListView();
+        //设置数据列表
+        recyclerView.setAdapter(new PatrolDataAdapter(patrolPageStatus.getDataList()));
+        //设置表头
+        LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.patrol_data_list_header,null,false );
+        rootLayout.setHeader(view);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<PatrolPageStatus> loader) {
+
     }
 }

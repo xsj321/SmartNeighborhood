@@ -5,20 +5,23 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 
-import com.example.smartagriculture.Model.Important.ImportantPageStatus;
+import com.example.smartagriculture.Model.Patrol.PatrolPageStatus;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.Properties;
 
-public class ImportantPageLoader extends AsyncTaskLoader<ImportantPageStatus> {
+public class PatrolPageLoader extends AsyncTaskLoader<PatrolPageStatus> {
+
     private String  IP;
     private int Port;
     private String location;
     private String user;
-    public ImportantPageLoader(@NonNull Context context,String location,String user) {
+    public PatrolPageLoader(@NonNull Context context, String location, String user) {
         super(context);
+        this.location = location;
+        this.user = user;
         Properties properties  = new Properties();
         try {
             properties.load(context.getAssets().open("server_settings.properties"));
@@ -33,17 +36,17 @@ public class ImportantPageLoader extends AsyncTaskLoader<ImportantPageStatus> {
 
     @Nullable
     @Override
-    public ImportantPageStatus loadInBackground() {
+    public PatrolPageStatus loadInBackground() {
         DataRequestUtil  util = DataRequestUtil.getInstance(IP,Port);
-        ImportantPageStatus importantPageStatus = null;
+        PatrolPageStatus patrolPageStatus = null;
         try {
-            importantPageStatus = util.getImportantData(location, user);
-            util.getPatrolData(location,user);
+            patrolPageStatus = util.getPatrolData(location,user);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return importantPageStatus;
+        return patrolPageStatus;
+
     }
 }

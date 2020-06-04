@@ -41,7 +41,7 @@
                     android:id="@+id/now_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="金凤区" />
+                    android:text="东光街道" />
             </LinearLayout>
 
 

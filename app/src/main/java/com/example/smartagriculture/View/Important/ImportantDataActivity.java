@@ -51,6 +51,9 @@ public class ImportantDataActivity extends AppCompatActivity implements LoaderMa
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setTitle(null);
+        //设置表头
+        LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.important_data_list_header,null,false );
+        rootLayout.setHeader(view);
         getSupportLoaderManager().initLoader(1,null,this).forceLoad();
     }
 
@@ -102,19 +105,19 @@ public class ImportantDataActivity extends AppCompatActivity implements LoaderMa
 
     @Override
     public void onLoadFinished(@NonNull Loader<ImportantPageStatus> loader, ImportantPageStatus importantPageStatus) {
+        if (importantPageStatus  == null){
+            return;
+        }
         if (importantPageStatus.getWaring()){
             //如果存在警告显示警告列表
             rootLayout.setWarningBoxVisibility(true);
             RecyclerView recyclerView_waring = rootLayout.getWaningListView();
             //获取警告列表
-            recyclerView_waring.setAdapter(new ImportantWaringAdapter(importantPageStatus.getWaringList()));
+            recyclerView_waring.setAdapter(new ImportantWaringAdapter(importantPageStatus.getWaringList(),this));
         }
         RecyclerView recyclerView = rootLayout.getListView();
         //设置数据列表
         recyclerView.setAdapter(new ImportantDataAdapter(importantPageStatus.getDataList()));
-        //设置表头
-        LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.important_data_list_header,null,false );
-        rootLayout.setHeader(view);
     }
 
     @Override

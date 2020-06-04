@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 
 import com.example.smartagriculture.Model.Cover.CoverPageStatus;
-import com.example.smartagriculture.Model.Important.ImportantPageStatus;
 
 import org.json.JSONException;
 
