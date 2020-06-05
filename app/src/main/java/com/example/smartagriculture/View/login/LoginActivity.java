@@ -241,24 +241,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             loader.abandon();
         }
         //登录失败
-        if (result.equals(LoginError)){
+        else if (result.equals(LoginError)){
             String text = getString(R.string.login_failed);
             Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             loader.abandon();
         }
         //注册成功
-        if (result.equals(RegSucceed)){
+        else if  (result.equals(RegSucceed)){
             String text = getString(R.string.registered_success);
             Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             startMain(userName);
             loader.abandon();
         }
         //注册失败
-        if (result.equals(RegError)){
+        else if  (result.equals(RegError)){
             String text = getString(R.string.registered_failed);
             Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             loader.abandon();
         }
+        else {
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            loader.abandon();
+        }
+
     }
 
     @Override

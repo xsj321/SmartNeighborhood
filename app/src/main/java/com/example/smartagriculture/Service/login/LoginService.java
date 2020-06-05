@@ -1,5 +1,6 @@
 package com.example.smartagriculture.Service.login;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.smartagriculture.Service.DataRequestUtil;
@@ -20,14 +21,14 @@ public class LoginService {
 
     }
 
-    public ResponseVo requestByPost(URL url, String accountNumber, String accountPassword){
+    public ResponseVo requestByPost(URL url, String accountNumber, String accountPassword,@Nullable String accountUsername){
         String body = "{\n" +
                 "  \"accountNumber\": \""+accountNumber+"\",\n" +
                 "  \"accountPassword\": \""+accountPassword+"\",\n" +
-                "  \"id\": 0\n" +
+                "  \"accountUsername\": \""+accountUsername+"\""+
                 "}";
         Log.e("当前登录发送的响应信息", body);
-        HttpURLConnection connection = null;
+        HttpURLConnection connection;
         StringBuilder resString = new StringBuilder();
         ResponseVo res = ResponseVo.buildFailInstance(ErrorCode.FAIL,"登录失败");
         try {
@@ -54,7 +55,7 @@ public class LoginService {
                     resString.append(data);
                 }
             }
-            Log.d("登录收到的响应信息",resString.toString());
+            Log.d("收到的响应信息",resString.toString());
             ResponseVo responseVo = DataRequestUtil.buildResponseVoByJson(resString.toString());
             if (responseVo == null){
                 return res;

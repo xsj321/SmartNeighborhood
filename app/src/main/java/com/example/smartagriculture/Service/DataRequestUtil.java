@@ -28,6 +28,8 @@ public class DataRequestUtil {
     private String IP;
     private int Port;
     public static final String LOGIN_URL = "loginController/login";
+    public static final String REGISTER_URL = "loginController/register";
+
     public DataRequestUtil(String IP, int port) {
         this.IP = IP;
         Port = port;

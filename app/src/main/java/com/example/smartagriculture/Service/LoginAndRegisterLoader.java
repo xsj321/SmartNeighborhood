@@ -8,20 +8,6 @@ import android.util.Log;
 
 import com.example.smartagriculture.Service.login.LoginService;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.Socket;
 import java.net.URL;
 
 import static com.example.smartagriculture.Service.DataRequestUtil.*;
@@ -80,14 +66,27 @@ public class LoginAndRegisterLoader extends AsyncTaskLoader<String> {
     @Nullable
     @Override
     public String loadInBackground() {
-        try {
-            ResponseVo responseVo = GetData(dataAddress, DataPort);
-            String reply = responseVo.getMsg();
-            Log.e("当前的返回", reply);
-            return reply;
-        } catch (Exception e) {
-            return null;
+        if (doWhat == true){
+            try {
+                ResponseVo responseVo = startLogin(dataAddress, DataPort);
+                String reply = responseVo.getMsg();
+                Log.e("当前的返回", reply);
+                return reply;
+            } catch (Exception e) {
+                return null;
+            }
         }
+        else {
+            try {
+                ResponseVo responseVo = startRegister(dataAddress, DataPort);
+                String reply = responseVo.getMsg();
+                Log.e("当前的返回", reply);
+                return reply;
+            }catch (Exception e){
+                return null;
+            }
+        }
+
     }
 
     /**
@@ -96,9 +95,15 @@ public class LoginAndRegisterLoader extends AsyncTaskLoader<String> {
      * @param Port  端口
      * @return  结果
      */
-    private ResponseVo GetData(String dataAddress, int Port) {
+    private ResponseVo startLogin(String dataAddress, int Port) {
         URL url = getRequestUri(dataAddress, Port, LOGIN_URL);
-        ResponseVo responseVo = service.requestByPost(url, Account, Passwd);
+        ResponseVo responseVo = service.requestByPost(url, Account, Passwd,null);
+        return responseVo;
+    }
+
+    private ResponseVo startRegister(String dataAddress, int Port){
+        URL url = getRequestUri(dataAddress, Port, REGISTER_URL);
+        ResponseVo responseVo = service.requestByPost(url, Account, Passwd, UserName);
         return responseVo;
     }
 }
