@@ -19,7 +19,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.smartagriculture.View.CustomViews.DataTable;
-import com.example.smartagriculture.Service.ImportantPageLoader;
 import com.example.smartagriculture.R;
 import com.example.smartagriculture.Model.Important.ImportantPageStatus;
 
@@ -100,7 +99,7 @@ public class ImportantDataActivity extends AppCompatActivity implements LoaderMa
     @NonNull
     @Override
     public Loader<ImportantPageStatus> onCreateLoader(int i, @Nullable Bundle bundle) {
-        return new ImportantPageLoader(this,"东光街道",NowUserName);
+        return new ImportantPageLoader(this,null);
     }
 
     @Override

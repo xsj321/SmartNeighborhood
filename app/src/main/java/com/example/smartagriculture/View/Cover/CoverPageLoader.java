@@ -12,6 +12,7 @@ public class CoverPageLoader extends AsyncTaskLoader<CoverPageStatus> {
     private String location;
     private CoverService service;
     private Context  context;
+
     public CoverPageLoader(@NonNull Context context, String location) {
         super(context);
         this.location = location;
