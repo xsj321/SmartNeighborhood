@@ -96,13 +96,13 @@ public class LoginAndRegisterLoader extends AsyncTaskLoader<String> {
      * @return  结果
      */
     private ResponseVo startLogin(String dataAddress, int Port) {
-        URL url = getRequestUri(dataAddress, Port, LOGIN_URL);
+        URL url = getRequestUrl(dataAddress, Port, LOGIN_URL);
         ResponseVo responseVo = service.requestByPost(url, Account, Passwd,null);
         return responseVo;
     }
 
     private ResponseVo startRegister(String dataAddress, int Port){
-        URL url = getRequestUri(dataAddress, Port, REGISTER_URL);
+        URL url = getRequestUrl(dataAddress, Port, REGISTER_URL);
         ResponseVo responseVo = service.requestByPost(url, Account, Passwd, UserName);
         return responseVo;
     }

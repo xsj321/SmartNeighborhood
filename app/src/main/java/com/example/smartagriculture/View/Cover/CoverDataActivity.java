@@ -19,7 +19,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.smartagriculture.Model.Cover.CoverPageStatus;
-import com.example.smartagriculture.Service.CoverPageLoader;
 import com.example.smartagriculture.View.CustomViews.DataTable;
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.R;
@@ -135,7 +134,7 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
     @NonNull
     @Override
     public Loader<CoverPageStatus> onCreateLoader(int i, @Nullable Bundle bundle) {
-        return new CoverPageLoader(this,"东光街道",NowUserName);
+        return new CoverPageLoader(this,null);
     }
 
     @Override

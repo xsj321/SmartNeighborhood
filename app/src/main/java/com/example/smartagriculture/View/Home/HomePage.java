@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.smartagriculture.View.Cover.CoverDataActivity;
 import com.example.smartagriculture.View.Important.ImportantDataActivity;
 import com.example.smartagriculture.View.Patrol.PatrolDataActivity;
-import com.example.smartagriculture.Service.HomePageLoader;
 import com.example.smartagriculture.R;
 import com.example.smartagriculture.Model.HomePage.HomePageStatus;
 

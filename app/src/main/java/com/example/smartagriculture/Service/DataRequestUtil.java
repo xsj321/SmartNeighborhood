@@ -1,6 +1,7 @@
 package com.example.smartagriculture.Service;
 
-import android.net.Uri;
+import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
@@ -15,28 +16,45 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class DataRequestUtil {
     private String IP;
     private int Port;
+    private String mainAddress;
     public static final String LOGIN_URL = "loginController/login";
     public static final String REGISTER_URL = "loginController/register";
+    public static final String HOME_URL = "homeController/home";
+    public static final String COVER_LIST_URL = "coverController/cover";
+
 
     public DataRequestUtil(String IP, int port) {
         this.IP = IP;
         Port = port;
     }
 
+    public DataRequestUtil(String address) {
+        mainAddress = address;
+    }
+
     static DataRequestUtil getInstance(String IP, int port) {
         return new DataRequestUtil(IP, port);
+    }
+
+    static DataRequestUtil getInstance(String address) {
+        return new DataRequestUtil(address);
     }
 
     /**
@@ -68,6 +86,7 @@ public class DataRequestUtil {
 
     /**
      * 获取Important页面的信息
+     *
      * @param location
      * @param user
      * @return
@@ -76,7 +95,7 @@ public class DataRequestUtil {
      */
     ImportantPageStatus getImportantData(String location, String user) throws IOException, JSONException {
         JSONObject respond = request("important_page", user, location).getJSONObject("respond").getJSONObject("important");
-        Log.d("收到的数据",respond.toString());
+        Log.d("收到的数据", respond.toString());
         if (respond == null) return null;
         JSONArray JSONwaringList = respond.getJSONArray("waring_list");
         JSONArray JSONdataList = respond.getJSONArray("detail");
@@ -106,7 +125,7 @@ public class DataRequestUtil {
         }
 
         if (JSONdataList.length() != 0) {
-            for (int i = 0;i<JSONdataList.length();i++){
+            for (int i = 0; i < JSONdataList.length(); i++) {
                 JSONObject nowData = JSONdataList.getJSONObject(i);
                 Integer id = nowData.getInt("id");
                 String address = nowData.getString("place");
@@ -119,7 +138,7 @@ public class DataRequestUtil {
                 if (waring) {
                     waringString = "异常";
                 }
-                if (air){
+                if (air) {
                     airString = "正常";
                 }
                 dataList.add(new ImportantDataListItem(
@@ -138,6 +157,7 @@ public class DataRequestUtil {
 
     /**
      * 获取cover页面的信息
+     *
      * @param location
      * @param user
      * @return
@@ -146,7 +166,7 @@ public class DataRequestUtil {
      */
     CoverPageStatus getCoverData(String location, String user) throws IOException, JSONException {
         JSONObject respond = request("cover_page", user, location).getJSONObject("respond").getJSONObject("cover");
-        Log.d("收到的数据",respond.toString());
+        Log.d("收到的数据", respond.toString());
         if (respond == null) return null;
         JSONArray JSONwaringList = respond.optJSONArray("waring_list");
         JSONArray JSONdataList = respond.getJSONArray("detail");
@@ -157,7 +177,7 @@ public class DataRequestUtil {
         Boolean isWaring = false;
         //对警告列表进行判断
         if (JSONwaringList.length() != 0) {
-            Log.v("警告列表",String.valueOf(JSONwaringList.length()));
+            Log.v("警告列表", String.valueOf(JSONwaringList.length()));
             isWaring = true;
             for (int i = 0; i < JSONwaringList.length(); i++) {
                 JSONObject nowWaring = JSONwaringList.getJSONObject(i);
@@ -176,7 +196,7 @@ public class DataRequestUtil {
         }
 
         if (JSONdataList.length() != 0) {
-            for (int i = 0;i<JSONdataList.length();i++){
+            for (int i = 0; i < JSONdataList.length(); i++) {
                 JSONObject nowData = JSONdataList.getJSONObject(i);
                 Integer id = nowData.getInt("id");
                 String address = nowData.getString("place");
@@ -200,12 +220,12 @@ public class DataRequestUtil {
 
     PatrolPageStatus getPatrolData(String location, String user) throws IOException, JSONException {
         JSONObject respond = request("patrol_page", user, location).getJSONObject("detail");
-        Log.d("getPatrolData收到的数据",respond.toString());
+        Log.d("getPatrolData收到的数据", respond.toString());
         JSONArray JSONdataList = respond.getJSONArray("detail");
         ArrayList<PatrolDataListItem> dataList = new ArrayList<>();
         PatrolPageStatus res;
         if (JSONdataList.length() != 0) {
-            for (int i = 0;i<JSONdataList.length();i++){
+            for (int i = 0; i < JSONdataList.length(); i++) {
                 JSONObject nowData = JSONdataList.getJSONObject(i);
                 String work_name = nowData.getString("work_name");
                 String date = nowData.getString("date");
@@ -230,7 +250,7 @@ public class DataRequestUtil {
                 "    }\n" +
                 "}\n";
 
-        Log.v("请求的数据",data);
+        Log.v("请求的数据", data);
         Socket socket = new Socket(IP, Port);
 //        Socket socket = new Socket("127.0.0.1",8888);
         OutputStream outputStream = socket.getOutputStream();
@@ -246,7 +266,7 @@ public class DataRequestUtil {
             return null;
         }
         String Msg = new String(b, 0, length, "GBK");
-        Log.v("返回的数据",Msg);
+        Log.v("返回的数据", Msg);
         inputStream.close();
         outputStream.close();
         dataInputStream.close();
@@ -254,20 +274,20 @@ public class DataRequestUtil {
         return new JSONObject(Msg);
     }
 
-    public void sendFix(String type, String user, String location,String locationID) throws IOException {
+    public void sendFix(String type, String user, String location, String locationID) throws IOException {
 
         String data = "{\n" +
                 "    \"request\": {\n" +
-                "        \"request_type\": \""+type+"\",\n" +
-                "        \"request_user\": \""+user+"\",\n" +
-                "        \"request_Location\": \""+locationID+"\"\n" +
+                "        \"request_type\": \"" + type + "\",\n" +
+                "        \"request_user\": \"" + user + "\",\n" +
+                "        \"request_Location\": \"" + locationID + "\"\n" +
                 "    },\n" +
                 "    \"fix\": {\n" +
-                "        \"id\": "+locationID+",\n" +
-                "        \"place\": \""+location+"\"\n" +
+                "        \"id\": " + locationID + ",\n" +
+                "        \"place\": \"" + location + "\"\n" +
                 "    }\n" +
                 "}\n";
-        Log.v("请求的数据",data);
+        Log.v("请求的数据", data);
         Socket socket = new Socket(IP, Port);
 //        Socket socket = new Socket("127.0.0.1",8888);
         OutputStream outputStream = socket.getOutputStream();
@@ -281,28 +301,33 @@ public class DataRequestUtil {
 
     /**
      * 获取请求的URL
+     *
      * @param mainAddress 服务器域名
-     * @param port 请求端口
-     * @param subAddress 详细路径
+     * @param port        请求端口
+     * @param subAddress  详细路径
      * @return 请求的URL
      */
-    public static URL getRequestUri(String mainAddress,int port,String subAddress){
-        String urlStr = mainAddress+"/"+subAddress;
-        Log.e("url为",urlStr);
-            try {
-                URL url = new URL(urlStr);
-                return url;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                Log.e("url无效",urlStr);
-                return null;
-            }
+    public static URL getRequestUrl(String mainAddress, @Nullable Integer port, String subAddress) {
+        String urlStr = mainAddress + "/" + subAddress;
+        Log.e("url为", urlStr);
+        try {
+            URL url = new URL(urlStr);
+            return url;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            Log.e("url无效", urlStr);
+            return null;
+        }
     }
 
-
-    public static ResponseVo buildResponseVoByJson(String str){
+    /***
+     * 创建返回数据对象
+     * @param str 返回信息JSON字符串
+     * @return ResponseVo对象
+     */
+    public static ResponseVo buildResponseVoByJson(String str) {
         ResponseVo res = new ResponseVo();
-        if (str!=null&&str!=""){
+        if (str != null && str != "") {
             try {
                 JSONObject resJson = new JSONObject(str);
                 res.setCode(resJson.getInt("code"));
@@ -314,5 +339,71 @@ public class DataRequestUtil {
             }
         }
         return null;
+    }
+
+
+    /**
+     * 通过POST发送数据
+     *
+     * @param url  url
+     * @param body 请求JSON
+     * @return 响应JSON
+     */
+    public static JSONObject requestByPost(URL url, String body) {
+        Log.e("当前登录发送的响应信息", body);
+        HttpURLConnection connection;
+        StringBuilder resString = new StringBuilder();
+        JSONObject res = null;
+        try {
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setUseCaches(false);
+            connection.setRequestProperty("content-type", "application/json");
+            connection.setRequestProperty("connection", "keep-alive");
+            connection.setRequestProperty("keep-alive", "timeout=60");
+            connection.connect();
+            OutputStream outputStream = connection.getOutputStream();
+            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+            dataOutputStream.writeBytes(body);
+            Log.e("写入完成", "!!!!!");
+            dataOutputStream.close();
+            int resCode = connection.getResponseCode();
+            Log.e("响应代码", String.valueOf(resCode));
+            if (resCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String data;
+                while ((data = reader.readLine()) != null) {
+                    resString.append(data);
+                }
+            }
+            Log.d("收到的响应信息", resString.toString());
+            res = new JSONObject(resString.toString());
+            if (res == null) {
+                return res;
+            }
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public static URL makeUrl(Context context, String subPath) {
+        try {
+            Properties properties = new Properties();
+            try {
+                properties.load(context.getAssets().open("server_settings.properties"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String domain = properties.getProperty("request_add");
+            URL url = DataRequestUtil.getRequestUrl(domain, null, subPath);
+            return url;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
