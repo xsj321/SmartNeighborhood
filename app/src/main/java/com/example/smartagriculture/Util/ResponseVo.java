@@ -1,9 +1,20 @@
-package com.example.smartagriculture.Service;
+package com.example.smartagriculture.Util;
+
+import org.json.JSONObject;
 
 public class ResponseVo<T> {
 
     private T data;
 
+    public T getRespond() {
+        return respond;
+    }
+
+    public void setRespond(T respond) {
+        this.respond = respond;
+    }
+
+    private T respond;
     /**
      * 返回消息
      */
@@ -92,6 +103,22 @@ public class ResponseVo<T> {
 
     public void setCode(Integer code) {
         this.code = code;
+    }
+
+    public static ResponseVo makeResponseVo(JSONObject jsonObject){
+        ResponseVo responseVo = ResponseVo.buildFailInstance();
+        try {
+            responseVo.setSuccess(jsonObject.getBoolean("success"));
+            responseVo.setCode(jsonObject.getInt("code"));
+            responseVo.setMsg(jsonObject.getString("msg"));
+            responseVo.setData(jsonObject.getJSONObject("data"));
+            responseVo.setRespond(jsonObject.getJSONObject("respond"));
+            return responseVo;
+        }catch (Exception e){
+            e.printStackTrace();
+            return responseVo;
+        }
+
     }
 
 }

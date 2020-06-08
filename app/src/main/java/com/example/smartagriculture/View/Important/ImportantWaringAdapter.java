@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.R;
-import com.example.smartagriculture.Service.DataRequestUtil;
+import com.example.smartagriculture.Util.DataRequestUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;

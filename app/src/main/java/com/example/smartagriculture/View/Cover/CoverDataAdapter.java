@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.R;
-
 import java.util.ArrayList;
 
 public class CoverDataAdapter extends RecyclerView.Adapter<CoverDataAdapter.ViewHolder> {

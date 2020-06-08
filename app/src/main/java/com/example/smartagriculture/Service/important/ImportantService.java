@@ -6,13 +6,11 @@ import android.util.Log;
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.Model.Important.ImportantDataListItem;
 import com.example.smartagriculture.Model.Important.ImportantPageStatus;
-import com.example.smartagriculture.Service.DataRequestUtil;
+import com.example.smartagriculture.Util.DataRequestUtil;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -64,12 +62,12 @@ public class ImportantService {
                     Boolean air = nowData.getBoolean("air");
                     Boolean waring = nowData.getBoolean("waring");
                     String waringString = "正常";
-                    String airString = "异常";
+                    String airString = "正常";
                     if (waring) {
                         waringString = "异常";
                     }
                     if (air) {
-                        airString = "正常";
+                        airString = "异常";
                     }
                     dataList.add(new ImportantDataListItem(
                             id,

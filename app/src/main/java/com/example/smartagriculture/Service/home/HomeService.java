@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.smartagriculture.Model.HomePage.HomePageStatus;
-import com.example.smartagriculture.Service.DataRequestUtil;
+import com.example.smartagriculture.Util.DataRequestUtil;
 
 import org.json.JSONObject;
 

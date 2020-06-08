@@ -6,33 +6,43 @@ import android.util.Log;
 
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.Model.Cover.CoverPageStatus;
-import com.example.smartagriculture.Service.DataRequestUtil;
+import com.example.smartagriculture.Util.DataRequestUtil;
+import com.example.smartagriculture.Util.ResponseVo;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class CoverService {
+
+    private Context context;
+
+    public CoverService(Context context) {
+        this.context = context;
+    }
+
     /**
      * 获取cover页面的信息
-     * @param context 上下文
+     *
      * @param location 查找地点
      * @return 井盖状态对象
      */
-     public CoverPageStatus getCoverData(Context context, @Nullable String location){
+    public CoverPageStatus getCoverData(@Nullable String location) {
         try {
             String body = "{\n" +
-                    "  \"place\": \""+location+"\"\n" +
+                    "  \"place\": \"" + location + "\"\n" +
                     "}";
             URL url = DataRequestUtil.makeUrl(context, DataRequestUtil.COVER_LIST_URL);
+            Log.e("当前cover发送的信息", body);
             JSONObject requestByPost = DataRequestUtil.requestByPost(url, body);
-            Log.e("当前登录发送的响应信息", body);
+            Log.e("当前cover收到的响应信息", requestByPost.toString());
             JSONObject respond = requestByPost.getJSONObject("respond").getJSONObject("cover");
-            Log.d("收到的数据",respond.toString());
+            Log.d("收到的数据", respond.toString());
             if (respond == null) return null;
             JSONArray JSONwaringList = respond.optJSONArray("waring_list");
             JSONArray JSONdataList = respond.getJSONArray("detail");
@@ -43,7 +53,7 @@ public class CoverService {
             Boolean isWaring = false;
             //对警告列表进行判断
             if (JSONwaringList.length() != 0) {
-                Log.v("警告列表",String.valueOf(JSONwaringList.length()));
+                Log.v("警告列表", String.valueOf(JSONwaringList.length()));
                 isWaring = true;
                 for (int i = 0; i < JSONwaringList.length(); i++) {
                     JSONObject nowWaring = JSONwaringList.getJSONObject(i);
@@ -62,7 +72,7 @@ public class CoverService {
             }
 
             if (JSONdataList.length() != 0) {
-                for (int i = 0;i<JSONdataList.length();i++){
+                for (int i = 0; i < JSONdataList.length(); i++) {
                     JSONObject nowData = JSONdataList.getJSONObject(i);
                     Integer id = nowData.getInt("id");
                     String address = nowData.getString("place");
@@ -81,10 +91,27 @@ public class CoverService {
             CoverPageStatus coverPageStatus = new CoverPageStatus(isWaring, dataList, waringList);
 
             return coverPageStatus;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
 
+    }
+
+    /**
+     * 修复井盖
+     * @param id 井盖id
+     * @return 修复状态
+     */
+    public boolean sendFix(int id){
+
+        String body = "{\n" +
+                "  \"id\": "+id+"\n" +
+                "}";
+        URL url = DataRequestUtil.makeUrl(context, DataRequestUtil.COVER_FIX_URL);
+        Log.v("请求的数据", body);
+        JSONObject requestByPost = DataRequestUtil.requestByPost(url, body);
+        ResponseVo responseVo = ResponseVo.makeResponseVo(requestByPost);
+        return responseVo.isSuccess();
     }
 }

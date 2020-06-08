@@ -7,6 +7,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,6 +29,7 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
     private TextView Temp,Him,PM;
     private ImageView CoverIMG,ImportantIMG;
     private String NowUserName;
+    private LoaderManager supportLoaderManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +77,8 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
                 startActivity(intent);
             }
         });
-
-        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
+        supportLoaderManager = getSupportLoaderManager();
+        supportLoaderManager.initLoader(1,null,this).forceLoad();
     }
 
     @NonNull
@@ -104,5 +106,12 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
     @Override
     public void onLoaderReset(@NonNull Loader<HomePageStatus> loader) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        supportLoaderManager.restartLoader(1,null,this).forceLoad();
+        Log.e("继续主页",getBaseContext().toString());
     }
 }

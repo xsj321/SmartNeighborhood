@@ -26,11 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.smartagriculture.View.Home.HomePage;
-import com.example.smartagriculture.Service.LoginAndRegisterLoader;
 import com.example.smartagriculture.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Properties;

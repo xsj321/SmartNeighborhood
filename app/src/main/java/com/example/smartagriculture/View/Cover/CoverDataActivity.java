@@ -29,9 +29,11 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
 
     private SearchView mSearchView;
     private DataTable rootLayout;
+    public static CoverWaringAdapter coverWaringAdapter;
+    public static CoverDataAdapter coverDataAdapter;
     private String NowUserName;
-    public static final ArrayList<CoverDataListItem> datlist =  new ArrayList<>();
-    public static final ArrayList<CoverDataListItem> list_waring = new ArrayList<>();
+    public static ArrayList<CoverDataListItem> list_data =  new ArrayList<>();
+    public static ArrayList<CoverDataListItem> list_waring = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,36 +60,6 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
         LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.cover_data_list_header,null,false );
         rootLayout.setHeader(view);
         getSupportLoaderManager().initLoader(1,null,this).forceLoad();
-        /*{
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-            datlist.add(new CoverDataListItem(1, "中山北街窨井盖4号", "正常"));
-
-        }*/
-
-        /*{
-            list_waring.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
-            list_waring.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
-            list_waring.add(new CoverDataListItem(1, "中山北街窨井盖4号", "异常(疑似开启、丢失)"));
-        }*/
-
-//        RecyclerView recyclerView = rootLayout.getListView();
-//        recyclerView.setAdapter(new CoverDataAdapter(datlist));
-//        RecyclerView recyclerView_waring = rootLayout.getWaningListView();
-//        recyclerView_waring.setAdapter(new CoverWaringAdapter(list_waring));
-
-
 
     }
 
@@ -146,14 +118,20 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
             //如果存在警告显示警告列表
             rootLayout.setWarningBoxVisibility(true);
             RecyclerView recyclerView_waring = rootLayout.getWaningListView();
+            list_waring = coverPageStatus.getWaringList();
+            coverWaringAdapter = new CoverWaringAdapter(list_waring, this);
             //获取警告列表
-            recyclerView_waring.setAdapter(new CoverWaringAdapter(coverPageStatus.getWaringList(), this));
+            recyclerView_waring.setAdapter(coverWaringAdapter);
         }
         RecyclerView recyclerView = rootLayout.getListView();
         //设置数据列表
-        recyclerView.setAdapter(new CoverDataAdapter(coverPageStatus.getDataList()));
+        list_data = coverPageStatus.getDataList();
+        coverDataAdapter = new CoverDataAdapter(list_data);
+        recyclerView.setAdapter(coverDataAdapter);
 
     }
+
+
 
     @Override
     public void onLoaderReset(@NonNull Loader<CoverPageStatus> loader) {

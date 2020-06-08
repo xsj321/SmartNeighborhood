@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 import com.example.smartagriculture.Model.Important.ImportantDataListItem;
 import com.example.smartagriculture.R;
-import com.example.smartagriculture.Service.DataRequestUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ImportantDataAdapter extends RecyclerView.Adapter<ImportantDataAdapter.ViewHolder> {

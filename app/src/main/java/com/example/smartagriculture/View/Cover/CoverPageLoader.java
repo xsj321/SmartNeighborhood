@@ -17,14 +17,14 @@ public class CoverPageLoader extends AsyncTaskLoader<CoverPageStatus> {
         super(context);
         this.location = location;
         this.context = context;
-        service = new CoverService();
+        service = new CoverService(context);
         this.location = location;
     }
 
     @Nullable
     @Override
     public CoverPageStatus loadInBackground() {
-        return service.getCoverData(context, location);
+        return service.getCoverData(location);
     }
 
 }

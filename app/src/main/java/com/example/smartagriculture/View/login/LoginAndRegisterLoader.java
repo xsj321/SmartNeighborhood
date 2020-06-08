@@ -1,4 +1,4 @@
-package com.example.smartagriculture.Service;
+package com.example.smartagriculture.View.login;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,11 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
+import com.example.smartagriculture.Util.ResponseVo;
 import com.example.smartagriculture.Service.login.LoginService;
 
 import java.net.URL;
 
-import static com.example.smartagriculture.Service.DataRequestUtil.*;
+import static com.example.smartagriculture.Util.DataRequestUtil.*;
 import static java.lang.Thread.sleep;
 
 public class LoginAndRegisterLoader extends AsyncTaskLoader<String> {

@@ -3,14 +3,12 @@ package com.example.smartagriculture.Service.login;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.smartagriculture.Service.DataRequestUtil;
-import com.example.smartagriculture.Service.ErrorCode;
-import com.example.smartagriculture.Service.ResponseVo;
+import com.example.smartagriculture.Util.DataRequestUtil;
+import com.example.smartagriculture.Util.ErrorCode;
+import com.example.smartagriculture.Util.ResponseVo;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;

@@ -18,14 +18,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.example.smartagriculture.Model.Important.ImportantPageStatus;
 import com.example.smartagriculture.Model.Patrol.PatrolPageStatus;
-import com.example.smartagriculture.Service.PatrolPageLoader;
 import com.example.smartagriculture.View.CustomViews.DataTable;
 import com.example.smartagriculture.Model.Patrol.PatrolDataListItem;
 import com.example.smartagriculture.R;
-import com.example.smartagriculture.View.Important.ImportantDataAdapter;
-import com.example.smartagriculture.View.Important.ImportantWaringAdapter;
 
 import java.util.ArrayList;
 
@@ -122,7 +118,7 @@ public class PatrolDataActivity extends AppCompatActivity implements LoaderManag
     @NonNull
     @Override
     public Loader<PatrolPageStatus> onCreateLoader(int i, @Nullable Bundle bundle) {
-        return new PatrolPageLoader(this,"东光街道",NowUserName);
+        return new PatrolPageLoader(this,null);
     }
 
     @Override
