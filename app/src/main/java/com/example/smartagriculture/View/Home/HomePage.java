@@ -1,13 +1,12 @@
 package com.example.smartagriculture.View.Home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,13 +14,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.smartagriculture.Model.HomePage.HomePageStatus;
+import com.example.smartagriculture.R;
 import com.example.smartagriculture.View.Cover.CoverDataActivity;
 import com.example.smartagriculture.View.Important.ImportantDataActivity;
 import com.example.smartagriculture.View.Patrol.PatrolDataActivity;
-import com.example.smartagriculture.R;
-import com.example.smartagriculture.Model.HomePage.HomePageStatus;
-
-import static java.lang.Thread.sleep;
 
 public class HomePage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<HomePageStatus> {
 
@@ -112,6 +109,5 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
     protected void onResume() {
         super.onResume();
         supportLoaderManager.restartLoader(1,null,this).forceLoad();
-        Log.e("继续主页",getBaseContext().toString());
     }
 }

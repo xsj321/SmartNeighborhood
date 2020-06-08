@@ -18,15 +18,23 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.example.smartagriculture.Model.Cover.CoverDataListItem;
+import com.example.smartagriculture.Model.Important.ImportantDataListItem;
 import com.example.smartagriculture.View.CustomViews.DataTable;
 import com.example.smartagriculture.R;
 import com.example.smartagriculture.Model.Important.ImportantPageStatus;
 
+import java.util.ArrayList;
+
 public class ImportantDataActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ImportantPageStatus> {
     private SearchView mSearchView;
     private DataTable rootLayout;
-    private String NowUserName;
-
+    private ImportantWaringAdapter importantWaringAdapter;
+    private ArrayList<CoverDataListItem> waringList;
+    private ImportantDataAdapter importantDataAdapter;
+    private ArrayList<ImportantDataListItem> dataList;
+    public static LoaderManager supportLoaderManager;
+    public static LoaderManager.LoaderCallbacks callbacks;
     //    public static final ArrayList<ImportantDataListItem> dataList =  new ArrayList<>();
 //    public static final ArrayList<CoverDataListItem> list_waring = new ArrayList<CoverDataListItem>();
     @Override
@@ -39,7 +47,7 @@ public class ImportantDataActivity extends AppCompatActivity implements LoaderMa
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         Intent  intent = getIntent();
-        this.NowUserName = intent.getStringExtra("user_name");
+        String nowUserName = intent.getStringExtra("user_name");
         rootLayout = findViewById(R.id.important_root);
         rootLayout.setPageTitle("重要场所");
         rootLayout.getDataTitleView().setText(getResources().getText(R.string.important_data_title));
@@ -53,7 +61,9 @@ public class ImportantDataActivity extends AppCompatActivity implements LoaderMa
         //设置表头
         LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.important_data_list_header,null,false );
         rootLayout.setHeader(view);
-        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
+        supportLoaderManager = getSupportLoaderManager();
+        callbacks = this;
+        supportLoaderManager.initLoader(1,null,this).forceLoad();
     }
 
     @Override
@@ -104,19 +114,23 @@ public class ImportantDataActivity extends AppCompatActivity implements LoaderMa
 
     @Override
     public void onLoadFinished(@NonNull Loader<ImportantPageStatus> loader, ImportantPageStatus importantPageStatus) {
-        if (importantPageStatus  == null){
-            return;
-        }
-        if (importantPageStatus.getWaring()){
+        if (importantPageStatus.getWaringList() != null){
             //如果存在警告显示警告列表
             rootLayout.setWarningBoxVisibility(true);
             RecyclerView recyclerView_waring = rootLayout.getWaningListView();
+            waringList = importantPageStatus.getWaringList();
+            importantWaringAdapter = new ImportantWaringAdapter(waringList, this);
             //获取警告列表
-            recyclerView_waring.setAdapter(new ImportantWaringAdapter(importantPageStatus.getWaringList(),this));
+            recyclerView_waring.setAdapter(importantWaringAdapter);
+        }
+        else{
+            rootLayout.setWarningBoxVisibility(false);
         }
         RecyclerView recyclerView = rootLayout.getListView();
+        dataList = importantPageStatus.getDataList();
+        importantDataAdapter = new ImportantDataAdapter(dataList);
         //设置数据列表
-        recyclerView.setAdapter(new ImportantDataAdapter(importantPageStatus.getDataList()));
+        recyclerView.setAdapter(importantDataAdapter);
     }
 
     @Override

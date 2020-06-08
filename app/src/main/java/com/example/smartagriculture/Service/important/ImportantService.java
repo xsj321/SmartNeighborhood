@@ -7,6 +7,7 @@ import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.Model.Important.ImportantDataListItem;
 import com.example.smartagriculture.Model.Important.ImportantPageStatus;
 import com.example.smartagriculture.Util.DataRequestUtil;
+import com.example.smartagriculture.Util.ResponseVo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,7 +16,18 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ImportantService {
-    public ImportantPageStatus getImportantData(Context context, String location) {
+    private Context context;
+
+    public ImportantService(Context context) {
+        this.context = context;
+    }
+
+    /**
+     * 获取重要地点的列表
+     * @param location 地点
+     * @return 重要地点重要列表
+     */
+    public ImportantPageStatus getImportantData( String location) {
         try {
             String body = "{\n" +
                     "  \"place\": \""+location+"\"\n" +
@@ -86,5 +98,23 @@ public class ImportantService {
             return null;
         }
 
+    }
+
+
+    /**
+     * 修复重要地点
+     * @param id 地点的id
+     * @return
+     */
+    public boolean sendFix(int id){
+
+        String body = "{\n" +
+                "  \"id\": "+id+"\n" +
+                "}";
+        URL url = DataRequestUtil.makeUrl(context, DataRequestUtil.IMPORTANT_FIX_URL);
+        Log.v("请求的数据", body);
+        JSONObject requestByPost = DataRequestUtil.requestByPost(url, body);
+        ResponseVo responseVo = ResponseVo.makeResponseVo(requestByPost);
+        return responseVo.isSuccess();
     }
 }

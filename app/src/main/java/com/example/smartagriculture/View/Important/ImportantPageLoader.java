@@ -16,12 +16,12 @@ public class ImportantPageLoader extends AsyncTaskLoader<ImportantPageStatus> {
         super(context);
         this.context = context;
         this.location = location;
-        service = new ImportantService();
+        service = new ImportantService(context);
     }
 
     @Nullable
     @Override
     public ImportantPageStatus loadInBackground() {
-        return service.getImportantData(context, location);
+        return service.getImportantData(location);
     }
 }

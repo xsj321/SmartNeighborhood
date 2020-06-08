@@ -29,11 +29,14 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
 
     private SearchView mSearchView;
     private DataTable rootLayout;
-    public static CoverWaringAdapter coverWaringAdapter;
-    public static CoverDataAdapter coverDataAdapter;
+    private   CoverWaringAdapter coverWaringAdapter;
+    private  CoverDataAdapter coverDataAdapter;
     private String NowUserName;
-    public static ArrayList<CoverDataListItem> list_data =  new ArrayList<>();
-    public static ArrayList<CoverDataListItem> list_waring = new ArrayList<>();
+    private  ArrayList<CoverDataListItem> list_data =  new ArrayList<>();
+    private  ArrayList<CoverDataListItem> list_waring = new ArrayList<>();
+
+    public static LoaderManager supportLoaderManager;
+    public static LoaderManager.LoaderCallbacks callbacks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +62,9 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
         //设置表头
         LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.cover_data_list_header,null,false );
         rootLayout.setHeader(view);
-        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
+        callbacks = this;
+        supportLoaderManager = getSupportLoaderManager();
+        supportLoaderManager.initLoader(1,null,this).forceLoad();
 
     }
 
@@ -111,10 +116,7 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
 
     @Override
     public void onLoadFinished(@NonNull Loader<CoverPageStatus> loader, CoverPageStatus coverPageStatus) {
-        if (coverPageStatus  == null){
-            return;
-        }
-        if (coverPageStatus.getWaring()){
+        if (coverPageStatus.getWaringList() != null){
             //如果存在警告显示警告列表
             rootLayout.setWarningBoxVisibility(true);
             RecyclerView recyclerView_waring = rootLayout.getWaningListView();
@@ -122,6 +124,8 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
             coverWaringAdapter = new CoverWaringAdapter(list_waring, this);
             //获取警告列表
             recyclerView_waring.setAdapter(coverWaringAdapter);
+        }else {
+            rootLayout.setWarningBoxVisibility(false);
         }
         RecyclerView recyclerView = rootLayout.getListView();
         //设置数据列表

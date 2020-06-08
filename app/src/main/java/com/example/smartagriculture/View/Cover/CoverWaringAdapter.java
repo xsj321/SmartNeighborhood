@@ -65,14 +65,7 @@ public class CoverWaringAdapter extends RecyclerView.Adapter<CoverWaringAdapter.
                 public void handleMessage(Message msg) {
                     switch (msg.what){
                         case 1:
-                            CoverDataActivity.coverWaringAdapter.notifyDataSetChanged();
-                            CoverDataActivity.coverDataAdapter.notifyDataSetChanged();
-                            Log.e("收到刷新消息", String.valueOf(msg.what));
-                            break;
-                        case 2:
-                            DataTable rootLayout =  activity.findViewById(R.id.cover_root);
-                            rootLayout.setWarningBoxVisibility(false);
-                            CoverDataActivity.coverDataAdapter.notifyDataSetChanged();
+                            CoverDataActivity.supportLoaderManager.restartLoader(1,null,CoverDataActivity.callbacks).forceLoad();
                     }
                 }
             };
@@ -83,19 +76,7 @@ public class CoverWaringAdapter extends RecyclerView.Adapter<CoverWaringAdapter.
                     @Override
                     public void run() {
                         coverService.sendFix(id);
-                        CoverPageStatus nowCoverData = coverService.getCoverData(null);
-                        CoverDataActivity.list_data.clear();
-                        CoverDataActivity.list_data.addAll(nowCoverData.getDataList());
-                        if (nowCoverData.getWaringList() != null){
-                            CoverDataActivity.list_waring.clear();
-                            CoverDataActivity.list_waring.addAll(nowCoverData.getWaringList());
-                            handler.sendEmptyMessage(1);
-                        }
-                        else {
-                            handler.sendEmptyMessage(2);
-                        }
-
-
+                        handler.sendEmptyMessage(1);
                     }
                 };
                 new Thread(networkTask).start();
