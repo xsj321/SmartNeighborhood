@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">智能街道</string>
+    <string name="app_name">掌上社区管理</string>
     <!-- Strings related to login -->
     <string name="prompt_email">电子邮箱</string>
     <string name="prompt_password">密码</string>
@@ -40,7 +40,7 @@
     <string name="cellar_cover">窨井盖</string>
     <string name="important_place">重要场所</string>
     <string name="fire_equipment">消防设备</string>
-    <string name="now_street">当前街道：</string>
+    <string name="now_street">当前社区：</string>
     <string name="body_temp">体感温度:</string>
     <string name="air_him">空气湿度:</string>
     <string name="air_pm">PM2.5:</string>
@@ -64,4 +64,5 @@
     <string name="temperature">温度</string>
     <string name="humidity">湿度</string>
     <string name="air_smoke">烟雾浓度</string>
+    <string name="login_sub_title">掌上社区管理，安全与速度并存</string>
 </resources>

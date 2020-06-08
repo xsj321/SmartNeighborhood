@@ -18,13 +18,13 @@
             android:src="@drawable/login_background_xml" />
 
         <TextView
-            android:layout_width="204dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="123dp"
-            android:layout_marginRight="25dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="130dp"
+
             android:fontFamily="@font/fangzheng"
-            android:text="智能街道，安全与速度并存"
+            android:text="@string/login_sub_title"
             android:textColor="#ffffffff"
             android:textSize="16sp" />
     </FrameLayout>
@@ -151,6 +151,13 @@
                     android:text="@string/login"
                     android:textColor="@color/PureWhite"
                     android:textSize="@dimen/button_text_size" />
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:visibility="gone"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:layout_gravity="center_horizontal"/>
             </LinearLayout>
 
             <RelativeLayout

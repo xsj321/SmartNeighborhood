@@ -45,7 +45,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     private EditText theusernameEditText;
     private TextView registerButton;
     private TextView boxtitle;
+    private ProgressBar progressBar;
+    private TextView toolBarButton;
     private int count =0 ;
+
+    public LoginActivity() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,8 +65,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         theusernameEditText = findViewById(R.id.theusername);
         registerButton = findViewById(R.id.register);
         boxtitle = findViewById(R.id.box_title);
+        progressBar= findViewById(R.id.progress_circular);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-        final TextView toolBarButton = findViewById(R.id.toolbar_button);
+        toolBarButton = findViewById(R.id.toolbar_button);
         setAndroidNativeLightStatusBar(this,true);
         Properties properties  = new Properties();
         try {
@@ -172,6 +178,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         toolBarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toolBarButton.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 getSupportLoaderManager().initLoader(++count, null, LoginActivity.this).forceLoad();
             }
         });
@@ -241,6 +249,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             String text = getString(R.string.login_failed);
             Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             loader.abandon();
+            progressBar.setVisibility(View.GONE);
+            toolBarButton.setVisibility(View.VISIBLE);
         }
         //注册成功
         else if  (result.equals(RegSucceed)){
@@ -254,10 +264,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             String text = getString(R.string.registered_failed);
             Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             loader.abandon();
+            progressBar.setVisibility(View.GONE);
+            toolBarButton.setVisibility(View.VISIBLE);
         }
         else {
             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
             loader.abandon();
+            progressBar.setVisibility(View.GONE);
+            toolBarButton.setVisibility(View.VISIBLE);
         }
 
     }

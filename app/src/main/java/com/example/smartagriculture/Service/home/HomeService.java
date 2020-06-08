@@ -64,7 +64,7 @@ public class HomeService {
             JSONObject environment = respond.getJSONObject("environment");
             JSONObject waring = respond.getJSONObject("waring");
             return new HomePageStatus(
-                    locaion.getInt("LocationID"),
+                    locaion.getString("place"),
                     environment.getInt("temperature"),
                     environment.getString("humidity"),
                     environment.getInt("PM"),

@@ -8,7 +8,7 @@
     <item android:width="360dp" android:height="310.67dp">
         <bitmap android:src="@drawable/login_background" ></bitmap>
     </item>
-    <item  android:width="228dp" android:height="36.67dp" android:gravity="center_horizontal" android:top="66dp">
+    <item  android:width="320dp" android:height="40dp" android:gravity="center_horizontal" android:top="66dp">
         <bitmap android:src="@drawable/login_title"  ></bitmap>
     </item>
 

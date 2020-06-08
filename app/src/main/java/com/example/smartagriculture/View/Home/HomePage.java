@@ -23,7 +23,7 @@ import com.example.smartagriculture.View.Patrol.PatrolDataActivity;
 public class HomePage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<HomePageStatus> {
 
     private FrameLayout PatrolButton,CoverButton,ImportantButton;
-    private TextView Temp,Him,PM;
+    private TextView Temp,Him,PM,NowLocation;
     private ImageView CoverIMG,ImportantIMG;
     private String NowUserName;
     private LoaderManager supportLoaderManager;
@@ -46,7 +46,7 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
         PM = findViewById(R.id.now_pm);
         CoverIMG = findViewById(R.id.cover_waring);
         ImportantIMG = findViewById(R.id.important_waring);
-
+        NowLocation = findViewById(R.id.now_location);
 
 
         PatrolButton.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +93,7 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
         Temp.setText(String.valueOf(homePageStatus.getTemperature()));
         Him.setText(String.valueOf(homePageStatus.getHumidity()));
         PM.setText(String.valueOf(homePageStatus.getPm2_5()));
+        NowLocation.setText(homePageStatus.getNowPlace());
         if (homePageStatus.getCover())CoverIMG.setVisibility(View.VISIBLE);
         else CoverIMG.setVisibility(View.GONE);
         if (homePageStatus.getImportant())ImportantIMG.setVisibility(View.VISIBLE);

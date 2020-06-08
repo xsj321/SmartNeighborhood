@@ -6,13 +6,15 @@ public class HomePageStatus {
     private int pm2_5;
     private Boolean cover = false;
     private Boolean important = false;
+    private String nowPlace;
 
-    public HomePageStatus(int  ID, int temperature, String humidity, int pm2_5, Boolean cover, Boolean important) {
+    public HomePageStatus(String  place, int temperature, String humidity, int pm2_5, Boolean cover, Boolean important) {
         this.temperature = temperature;
         this.humidity = humidity;
         this.pm2_5 = pm2_5;
         this.cover = cover;
         this.important = important;
+        this.nowPlace = place;
     }
 
     public int getTemperature() {
@@ -33,5 +35,13 @@ public class HomePageStatus {
 
     public Boolean getImportant() {
         return important;
+    }
+
+    public String getNowPlace() {
+        return nowPlace;
+    }
+
+    public void setNowPlace(String nowPlace) {
+        this.nowPlace = nowPlace;
     }
 }
