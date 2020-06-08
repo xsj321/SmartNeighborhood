@@ -178,9 +178,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         toolBarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolBarButton.setVisibility(View.GONE);
-                progressBar.setVisibility(View.VISIBLE);
-                getSupportLoaderManager().initLoader(++count, null, LoginActivity.this).forceLoad();
+                if (
+                        passwordEditText.getText().toString().equals("")||
+                        (theusernameEditText.getText().toString().equals("")&&theusernameEditText.getVisibility() == View.VISIBLE)||
+                        passwordEditText.getText().toString().equals("")
+                ){
+                    Toast.makeText(getApplicationContext(), "账号密码不能为空", Toast.LENGTH_LONG).show();
+                } else{
+                    toolBarButton.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    getSupportLoaderManager().initLoader(++count, null, LoginActivity.this).forceLoad();
+                }
+
             }
         });
     }
