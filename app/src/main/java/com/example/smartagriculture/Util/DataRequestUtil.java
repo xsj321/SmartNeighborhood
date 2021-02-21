@@ -29,8 +29,8 @@ public class DataRequestUtil {
     private String IP;
     private int Port;
     private String mainAddress;
-    public static final String LOGIN_URL = "loginController/login";
-    public static final String REGISTER_URL = "loginController/register";
+    public static final String LOGIN_URL = "account/login";
+    public static final String REGISTER_URL = "account/register";
     public static final String HOME_URL = "homeController/home";
     public static final String COVER_LIST_URL = "coverController/cover";
     public static final String COVER_FIX_URL = "coverController/fixCover";

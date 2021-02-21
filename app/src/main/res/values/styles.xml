@@ -22,17 +22,18 @@
         <item name="colorControlActivated">@color/PureWhite</item>
     </style>
 
-    <style name="AllWriteLoginText">
+    <style name="AllWriteLoginText" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/LoginTextColor</item>
         <item name="android:textColorHint">@color/LoginTextColor</item>
         <item name="android:textSize">17sp</item>
         <item name="android:paddingLeft">20dp</item>
         <item name="android:paddingRight">20dp</item>
-        <item name="android:background">@drawable/login_text_boder</item>
         <item name="android:textCursorDrawable">@drawable/color_cursor</item>
         <item name="android:layout_marginRight">33dp</item>
         <item name="android:layout_marginLeft">33dp</item>
         <item name="android:fontFamily">@font/fangzheng</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
     <style name="MainTextstyle">

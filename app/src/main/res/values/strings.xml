@@ -64,5 +64,5 @@
     <string name="temperature">温度</string>
     <string name="humidity">湿度</string>
     <string name="air_smoke">烟雾浓度</string>
-    <string name="login_sub_title">掌上社区管理，安全与速度并存</string>
+    <string name="login_sub_title">掌上园区管理，安全与速度并存</string>
 </resources>
