@@ -139,6 +139,8 @@ public class DataRequestUtil {
         socket.close();
     }
 
+
+
     /**
      * 获取请求的URL
      *
