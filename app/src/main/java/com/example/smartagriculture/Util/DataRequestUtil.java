@@ -37,6 +37,7 @@ public class DataRequestUtil {
     public static final String IMPORTANT_LIST_URL =  "importantController/getImportant";
     public static final String IMPORTANT_FIX_URL = "importantController/fixImportant";
     public static final String PATROL_LIST_URL = "patrolController/getImportant";
+    public static final String DEVICE_LIST_URL = "app/thing/getDeviceListByAccount";
 
 
 

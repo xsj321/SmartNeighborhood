@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.example.smartagriculture.dummy.DummyContent.DummyItem;
 
+import com.example.smartagriculture.Model.Device.Devcie;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,9 +19,9 @@ import java.util.List;
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final ArrayList<Devcie> mValues;
 
-    public MyItemRecyclerViewAdapter(List<DummyItem> items) {
+    public MyItemRecyclerViewAdapter(ArrayList<Devcie> items) {
         mValues = items;
     }
 
@@ -32,8 +35,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getDeviceId());
+        holder.mContentView.setText(mValues.get(position).getDeviceName());
     }
 
     @Override
@@ -45,7 +48,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public Devcie mItem;
 
         public ViewHolder(View view) {
             super(view);

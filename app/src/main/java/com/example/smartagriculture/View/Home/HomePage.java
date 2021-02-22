@@ -105,8 +105,8 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
                 startActivity(intent);
             }
         });
-        supportLoaderManager = getSupportLoaderManager();
-        supportLoaderManager.initLoader(1,null,this).forceLoad();
+//        supportLoaderManager = getSupportLoaderManager();
+//        supportLoaderManager.initLoader(1,null,this).forceLoad();
     }
 
     @NonNull
@@ -140,6 +140,6 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
     @Override
     protected void onResume() {
         super.onResume();
-        supportLoaderManager.restartLoader(1,null,this).forceLoad();
+//        supportLoaderManager.restartLoader(1,null,this).forceLoad();
     }
 }
