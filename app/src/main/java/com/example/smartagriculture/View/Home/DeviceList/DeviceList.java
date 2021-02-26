@@ -1,4 +1,4 @@
-package com.example.smartagriculture;
+package com.example.smartagriculture.View.Home.DeviceList;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.smartagriculture.R;
 import com.example.smartagriculture.Util.DataRequestUtil;
-import com.example.smartagriculture.dummy.DummyContent;
 import com.example.smartagriculture.Model.Device.Devcie;
 
 import org.json.JSONArray;
@@ -21,7 +21,6 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

@@ -1,4 +1,4 @@
-package com.example.smartagriculture;
+package com.example.smartagriculture.View.Home.DeviceList;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,12 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.smartagriculture.R;
 import com.example.smartagriculture.dummy.DummyContent.DummyItem;
 
 import com.example.smartagriculture.Model.Device.Devcie;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
