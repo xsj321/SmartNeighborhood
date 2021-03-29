@@ -33,7 +33,7 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
     private ImageView CoverIMG,ImportantIMG;
     private String NowUserName;
     private LoaderManager supportLoaderManager;
-    private String[] titles = new String[]{"巡逻","井盖","场所"};
+    private String[] titles = new String[]{"所有设备","警报","任务"};
     private ArrayList<Fragment> fragments = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +62,6 @@ public class HomePage extends AppCompatActivity implements LoaderManager.LoaderC
             homeTab.addTab(homeTab.newTab());
             fragments.add(new DeviceList());
         }
-
-
-
-
 
 
 

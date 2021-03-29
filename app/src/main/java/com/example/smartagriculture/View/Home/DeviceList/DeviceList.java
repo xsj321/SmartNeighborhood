@@ -109,13 +109,11 @@ public class DeviceList extends Fragment {
                         } else {
                             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
                         }
-                        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DevList));
+                        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DevList,getContext()));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                // Set the adapter
-
             }
         });
 

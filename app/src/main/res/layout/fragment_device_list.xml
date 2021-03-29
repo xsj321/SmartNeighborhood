@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_root"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="125dp"
-    android:layout_height="125dp"
+    android:layout_height="150dp"
     android:layout_margin="16dp"
     android:background="@drawable/login_text_background"
     android:orientation="vertical">
@@ -13,17 +15,37 @@
         android:background="@color/colorPrimary"/>
 
     <TextView
+        android:text="设备ID:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        style="@style/device_item_text"
+        />
+
+    <TextView
         android:id="@+id/item_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
-        android:id="@+id/content"
+        android:text="设备名称:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_marginLeft="8dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        style="@style/device_item_text"
+        />
+
+    <TextView
+        android:id="@+id/content"
+        tools:text="测试设备"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 
 

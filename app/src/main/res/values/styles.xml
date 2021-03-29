@@ -10,10 +10,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+
 
     <style name="AllBlueLogin">
         <item name="android:textColor">@color/PureWhite</item>
@@ -46,9 +43,8 @@
         <item name="android:typeface">normal</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
     <style name="toolbar_while_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">@color/PureWhite</item>
@@ -84,6 +80,18 @@
         <item name="android:textSize">32sp</item>
         <item name="fontFamily">@font/fangzheng</item>
         <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="device_item_text">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/fangzheng</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="device_detail_item_text">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/fangzheng</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 </resources>
