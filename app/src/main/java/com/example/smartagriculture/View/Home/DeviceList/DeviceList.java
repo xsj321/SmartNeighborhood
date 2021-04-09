@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.smartagriculture.R;
 import com.example.smartagriculture.Util.DataRequestUtil;
-import com.example.smartagriculture.Model.Device.Devcie;
+import com.example.smartagriculture.Model.Device.Device;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,13 +92,14 @@ public class DeviceList extends Fragment {
             public void call(JSONObject jsonObject) {
                 Log.d("JavaRXTest",jsonObject.toString() );
                 try {
-                    ArrayList<Devcie> DevList = new ArrayList<>();
+                    ArrayList<Device> DevList = new ArrayList<>();
                     JSONArray data = jsonObject.getJSONArray("data");
                     for (int i =0;i<data.length() ;i++){
-                        DevList.add(new Devcie(
+                        DevList.add(new Device(
                                 data.getJSONObject(i).getString("id"),
                                 data.getJSONObject(i).getString("name"),
-                                data.getJSONObject(i).getString("event_id")
+                                data.getJSONObject(i).getString("event_id"),
+                                data.getJSONObject(i).getJSONObject("components")
                                 ));
                     }
                     if (view instanceof RecyclerView) {

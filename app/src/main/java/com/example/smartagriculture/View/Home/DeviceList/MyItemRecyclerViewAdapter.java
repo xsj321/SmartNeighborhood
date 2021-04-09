@@ -13,7 +13,7 @@ import com.example.smartagriculture.DetailActivity;
 import com.example.smartagriculture.R;
 import com.example.smartagriculture.dummy.DummyContent.DummyItem;
 
-import com.example.smartagriculture.Model.Device.Devcie;
+import com.example.smartagriculture.Model.Device.Device;
 
 import java.util.ArrayList;
 
@@ -23,10 +23,10 @@ import java.util.ArrayList;
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final ArrayList<Devcie> mValues;
+    private final ArrayList<Device> mValues;
     private Context context;
 
-    public MyItemRecyclerViewAdapter(ArrayList<Devcie> items, Context context) {
+    public MyItemRecyclerViewAdapter(ArrayList<Device> items, Context context) {
         this.context = context;
         mValues = items;
     }
@@ -39,14 +39,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder,int position) {
+        final Device nowDevice = mValues.get(position);
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getDeviceId());
-        holder.mContentView.setText(mValues.get(position).getDeviceName());
+        holder.mIdView.setText(nowDevice.getDeviceId());
+        holder.mContentView.setText(nowDevice.getDeviceName());
         holder.itemRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("comData",nowDevice.getDeviceCom().toString());
                 context.startActivity(intent);
             }
         });
@@ -62,7 +64,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public Devcie mItem;
+        public Device mItem;
         public LinearLayout itemRoot;
 
         public ViewHolder(View view) {

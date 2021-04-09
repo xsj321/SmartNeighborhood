@@ -2,15 +2,21 @@ package com.example.smartagriculture.Model.Device;
 
 import android.support.annotation.NonNull;
 
-public class Devcie {
+import org.json.JSONObject;
+
+import java.io.Serializable;
+
+public class Device implements Serializable {
     private String DeviceId;
     private String DeviceName;
     private String DeviceEvent;
+    private JSONObject DeviceCom;
 
-    public Devcie(String deviceId, String deviceName, String deviceEvent) {
+    public Device(String deviceId, String deviceName, String deviceEvent , JSONObject deviceCom) {
         DeviceId = deviceId;
         DeviceName = deviceName;
         DeviceEvent = deviceEvent;
+        DeviceCom = deviceCom;
     }
 
     @NonNull
@@ -45,5 +51,13 @@ public class Devcie {
 
     public void setDeviceEvent(String deviceEvent) {
         DeviceEvent = deviceEvent;
+    }
+
+    public JSONObject getDeviceCom() {
+        return DeviceCom;
+    }
+
+    public void setDeviceCom(JSONObject deviceCom) {
+        DeviceCom = deviceCom;
     }
 }
