@@ -91,7 +91,7 @@
                         style="@style/watcher"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        tools:text="25"/>
+                        android:text="25"/>
                     <TextView
                         android:layout_width="0dp"
                         style="@style/watcher"
@@ -129,7 +129,7 @@
                         style="@style/watcher"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        tools:text="68"/>
+                        android:text="68"/>
                     <TextView
                         android:layout_width="0dp"
                         style="@style/watcher"
@@ -166,7 +166,7 @@
                         style="@style/watcher"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        tools:text="优"/>
+                        android:text="优"/>
                 </LinearLayout>
             </LinearLayout>
 

@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitle("设备详情页");
         Intent intent = getIntent();
         String comData = intent.getStringExtra("comData");
         List<Component> componentList = new ArrayList<>();
@@ -62,9 +62,13 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        Log.d("列表",componentList.get(1).getComponentName());
+//        Log.d("列表",componentList.get(1).getComponentName());
 
-        DeviceDetailAdapter deviceDetailAdapter = new DeviceDetailAdapter(componentList, this);
+        List<Component> testList = new ArrayList<>();
+        testList.add(new Component("温度","int","22"));
+        testList.add(new Component("湿度","int","32"));
+        testList.add(new Component("状态","boolean","true"));
+        DeviceDetailAdapter deviceDetailAdapter = new DeviceDetailAdapter(testList, this);
 
         RecyclerView deviceList  = findViewById(R.id.device_all_info);
         deviceList.setLayoutManager(new GridLayoutManager(this,2));
