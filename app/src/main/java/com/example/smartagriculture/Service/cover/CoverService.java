@@ -41,7 +41,7 @@ public class CoverService {
             Log.e("当前cover发送的信息", body);
             JSONObject requestByPost = DataRequestUtil.requestByPost(url, body);
             Log.e("当前cover收到的响应信息", requestByPost.toString());
-            JSONObject respond = requestByPost.getJSONObject("respond").getJSONObject("cover");
+            JSONObject respond = requestByPost.getJSONObject("data");
             Log.d("收到的数据", respond.toString());
             if (respond == null) return null;
             JSONArray JSONwaringList = respond.optJSONArray("waring_list");
@@ -59,10 +59,10 @@ public class CoverService {
                     JSONObject nowWaring = JSONwaringList.getJSONObject(i);
                     Integer id = nowWaring.getInt("id");
                     String place = nowWaring.getString("place");
-                    Boolean waring = nowWaring.getBoolean("waring");
+                    int waring = nowWaring.getInt("waring");
                     //后台懒得改这里做一个转换
                     String waringString = "正常";
-                    if (waring) {
+                    if (waring == 1) {
                         waringString = "异常";
                     }
                     waringList.add(new CoverDataListItem(id, place, waringString));
@@ -76,9 +76,9 @@ public class CoverService {
                     JSONObject nowData = JSONdataList.getJSONObject(i);
                     Integer id = nowData.getInt("id");
                     String address = nowData.getString("place");
-                    Boolean waring = nowData.getBoolean("waring");
+                    int waring = nowData.getInt("waring");
                     String waringString = "正常";
-                    if (waring) {
+                    if (waring == 1) {
                         waringString = "异常";
                     }
                     dataList.add(new CoverDataListItem(

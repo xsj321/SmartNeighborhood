@@ -2,29 +2,60 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/data_table_item_background"
+    android:layout_height="80dp"
     android:orientation="horizontal"
     xmlns:tools="http://schemas.android.com/tools"
+    android:padding="8dp"
     >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/cover"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="vertical"
-        android:background="@drawable/dataitem_boder"
+        android:paddingLeft="48dp"
         >
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="left|center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/cover_item_text"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorAccent"
+                android:text="井盖地点:" />
             <TextView
                 android:id="@+id/cover_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                style="@style/cover_item_text"
                 tools:text="中山北街窨井盖4号" />
-        </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -32,21 +63,32 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:background="@drawable/dataitem_boder"
         >
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="left|center_vertical"
+            >
 
             <TextView
-                android:id="@+id/cover_status"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                style="@style/cover_item_text"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/colorAccent"
+                android:text="状态:" />
+            <TextView
+                android:id="@+id/cover_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:textStyle="bold"
                 android:textColor="@color/status_normal"
                 tools:text="正常" />
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

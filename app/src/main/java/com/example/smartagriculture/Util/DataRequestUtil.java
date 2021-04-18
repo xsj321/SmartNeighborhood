@@ -32,8 +32,8 @@ public class DataRequestUtil {
     public static final String LOGIN_URL = "account/login";
     public static final String REGISTER_URL = "account/register";
     public static final String HOME_URL = "homeController/home";
-    public static final String COVER_LIST_URL = "coverController/cover";
-    public static final String COVER_FIX_URL = "coverController/fixCover";
+    public static final String COVER_LIST_URL = "app/thing/getCoverListByLocation";
+    public static final String COVER_FIX_URL = "app/thing/fixCoverWaring";
     public static final String IMPORTANT_LIST_URL =  "importantController/getImportant";
     public static final String IMPORTANT_FIX_URL = "importantController/fixImportant";
     public static final String PATROL_LIST_URL = "patrolController/getImportant";

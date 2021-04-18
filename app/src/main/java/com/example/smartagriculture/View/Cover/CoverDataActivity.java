@@ -60,8 +60,8 @@ public class CoverDataActivity extends AppCompatActivity implements LoaderManage
         getSupportActionBar().setTitle(null);
         rootLayout.setWarningBoxVisibility(false);
         //设置表头
-        LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.cover_data_list_header,null,false );
-        rootLayout.setHeader(view);
+//        LinearLayout view= (LinearLayout) LayoutInflater.from(this).inflate(R.layout.cover_data_list_header,null,false );
+//        rootLayout.setHeader(view);
         callbacks = this;
         supportLoaderManager = getSupportLoaderManager();
         supportLoaderManager.initLoader(1,null,this).forceLoad();

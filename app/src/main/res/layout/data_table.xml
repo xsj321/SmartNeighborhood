@@ -27,7 +27,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/datapage_background"
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/warning_box"
@@ -64,12 +63,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="14dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/homepage_button_background"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <FrameLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
 

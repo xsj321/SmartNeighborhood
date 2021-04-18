@@ -65,12 +65,12 @@
             <TextView
                 android:id="@+id/waring_cover_button"
                 android:layout_width="48dp"
-                android:layout_height="20dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="#F5AD59"
-                android:textColor="@color/PureWhite"
-                android:text="@string/fix" />
+                android:background="@drawable/login_button_background"
+                android:gravity="center"
+                android:text="@string/fix"
+                android:textColor="@color/PureWhite" />
         </FrameLayout>
 
     </LinearLayout>

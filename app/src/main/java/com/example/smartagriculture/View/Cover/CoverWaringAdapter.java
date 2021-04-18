@@ -2,16 +2,19 @@ package com.example.smartagriculture.View.Cover;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smartagriculture.Model.Cover.CoverDataListItem;
 import com.example.smartagriculture.Model.Cover.CoverPageStatus;
@@ -38,6 +41,7 @@ public class CoverWaringAdapter extends RecyclerView.Adapter<CoverWaringAdapter.
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cover_waring_list_item,viewGroup,false);
         Log.d("创建","ViewHolder");
         return new CoverWaringAdapter.ViewHolder(view);
+
     }
 
     @Override
@@ -72,15 +76,35 @@ public class CoverWaringAdapter extends RecyclerView.Adapter<CoverWaringAdapter.
             @Override
             public void onClick(View v) {
 
-                Runnable networkTask = new Runnable() {
-                    @Override
-                    public void run() {
-                        coverService.sendFix(id);
-                        handler.sendEmptyMessage(1);
-                    }
-                };
-                new Thread(networkTask).start();
+                AlertDialog alertDialog = new AlertDialog.Builder(activity)
+                        .setTitle("修复确认")
+                        .setMessage("确认危险解除并对设备修复完成")
+                        .setIcon(R.mipmap.fix)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加"Yes"按钮
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Runnable networkTask = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        coverService.sendFix(id);
+                                        handler.sendEmptyMessage(1);
+                                    }
+                                };
+                                new Thread(networkTask).start();
+                                Toast.makeText(activity, "已上报修复设备", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加取消
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(activity, "取消上报", Toast.LENGTH_SHORT).show();
+                            }
+                        }).create();
+
+                alertDialog.show();
             }
+
         });
     }
 

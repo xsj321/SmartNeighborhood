@@ -111,7 +111,7 @@ public class ResponseVo<T> {
             responseVo.setSuccess(jsonObject.getBoolean("success"));
             responseVo.setCode(jsonObject.getInt("code"));
             responseVo.setMsg(jsonObject.getString("msg"));
-            responseVo.setData(jsonObject.getJSONObject("data"));
+            responseVo.setData(jsonObject.optJSONObject("data"));
             responseVo.setRespond(jsonObject.getJSONObject("respond"));
             return responseVo;
         }catch (Exception e){
