@@ -2,7 +2,9 @@ package com.example.smartagriculture.View.Home.DeviceList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +23,12 @@ import java.util.ArrayList;
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.ViewHolder> {
 
     private final ArrayList<Device> mValues;
     private Context context;
 
-    public MyItemRecyclerViewAdapter(ArrayList<Device> items, Context context) {
+    public DeviceListAdapter(ArrayList<Device> items, Context context) {
         this.context = context;
         mValues = items;
     }
@@ -44,6 +46,13 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(nowDevice.getDeviceId());
         holder.mContentView.setText(nowDevice.getDeviceName());
+        Log.d("在线状态！Q！！！！！！", String.valueOf(nowDevice.isOnline()));
+        if (!nowDevice.isOnline()){
+            holder.onLine.setBackgroundColor(Color.parseColor("#EE3B3B"));
+        }else {
+            holder.onLine.setBackgroundColor(Color.parseColor("#039BE5"));
+        }
+
         holder.itemRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +61,11 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 context.startActivity(intent);
             }
         });
+    }
+
+
+    public void freshAdapter(){
+        notifyDataSetChanged();
     }
 
     @Override
@@ -66,6 +80,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final TextView mContentView;
         public Device mItem;
         public LinearLayout itemRoot;
+        public LinearLayout onLine;
 
         public ViewHolder(View view) {
             super(view);
@@ -73,6 +88,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
             itemRoot = view.findViewById(R.id.item_root);
+            onLine = view.findViewById(R.id.is_online);
         }
 
         @Override

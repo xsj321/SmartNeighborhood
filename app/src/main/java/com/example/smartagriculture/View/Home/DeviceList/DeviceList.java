@@ -28,6 +28,8 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
+import static java.lang.Thread.sleep;
+
 
 /**
  * A fragment representing a list of Items.
@@ -37,8 +39,12 @@ public class DeviceList extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 3;
+    private int mColumnCount = 0;
 
+    private ArrayList<Device> DevList;
+
+    private DeviceListAdapter deviceListAdapter;
+    private             RecyclerView recyclerView;
     private View view;
 
     /**
@@ -67,8 +73,12 @@ public class DeviceList extends Fragment {
         }
 
 
+        DevList = new ArrayList<>();
 
+        deviceListAdapter = new DeviceListAdapter(DevList, getContext());
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +86,25 @@ public class DeviceList extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_device_list_list, container, false);
 
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+
+            recyclerView = (RecyclerView) view;
+            if (mColumnCount <= 1) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }
+            recyclerView.setAdapter(deviceListAdapter);
+
+        }
+
+        update(true);
+
+        return view;
+    }
+
+    private void update(final boolean now){
         Observable.just("1").map(new Func1<String, JSONObject>() {
             @Override
             public JSONObject call(String s) {
@@ -85,40 +114,61 @@ public class DeviceList extends Fragment {
                 URL url = DataRequestUtil.makeUrl(getContext(), DataRequestUtil.DEVICE_LIST_URL);
                 Log.v("请求的数据", body);
                 JSONObject requestByPost = DataRequestUtil.requestByPost(url, body);
+                if (!now){
+                    try {
+                        sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 return requestByPost;
             }
         }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<JSONObject>() {
             @Override
             public void call(JSONObject jsonObject) {
-                Log.d("JavaRXTest",jsonObject.toString() );
                 try {
-                    ArrayList<Device> DevList = new ArrayList<>();
+                    Log.d("JavaRXTest",jsonObject.toString() );
                     JSONArray data = jsonObject.getJSONArray("data");
+                    DevList.clear();
                     for (int i =0;i<data.length() ;i++){
                         DevList.add(new Device(
                                 data.getJSONObject(i).getString("id"),
                                 data.getJSONObject(i).getString("name"),
                                 data.getJSONObject(i).getString("event_id"),
-                                data.getJSONObject(i).getJSONObject("components")
-                                ));
+                                data.getJSONObject(i).getJSONObject("components"),
+                                data.getJSONObject(i).getBoolean("on_line")
+                        ));
                     }
-                    if (view instanceof RecyclerView) {
-                        Context context = view.getContext();
-                        RecyclerView recyclerView = (RecyclerView) view;
-                        if (mColumnCount <= 1) {
-                            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                        } else {
-                            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-                        }
-                        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DevList,getContext()));
-                    }
+                    deviceListAdapter.freshAdapter();
+                    update(false);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    update(false);
                 }
             }
         });
-
-
-        return view;
     }
+
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        Log.d("设备页面生命周期","onPause()");
+//        update();
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        Log.d("设备页面生命周期","onResume()");
+//        update();
+//    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        Log.d("设备页面生命周期","onAttach()");
+//        update();
+//    }
 }

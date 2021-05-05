@@ -19,6 +19,12 @@ public class Component implements Serializable {
         this.value = String.valueOf(value);
     }
 
+    public Component(String componentName, String type, boolean value) {
+        this.componentName = componentName;
+        this.type = type;
+        this.value = String.valueOf(value);
+    }
+
 
     public String getComponentName() {
         return componentName;

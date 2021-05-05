@@ -1,6 +1,5 @@
 package com.example.smartagriculture.View.Home.Controls;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,9 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,29 +15,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.smartagriculture.Model.Device.Device;
 import com.example.smartagriculture.Model.HomePage.HomePageStatus;
 import com.example.smartagriculture.R;
-import com.example.smartagriculture.Util.DataRequestUtil;
 import com.example.smartagriculture.View.Cover.CoverDataActivity;
-import com.example.smartagriculture.View.Home.DeviceList.DeviceList;
-import com.example.smartagriculture.View.Home.DeviceList.MyItemRecyclerViewAdapter;
 import com.example.smartagriculture.View.Home.HomePageLoader;
 import com.example.smartagriculture.View.Important.ImportantDataActivity;
 import com.example.smartagriculture.View.Patrol.PatrolDataActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URL;
-import java.util.ArrayList;
-
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -176,4 +155,20 @@ public class ControlFragment extends Fragment implements LoaderManager.LoaderCal
     public void onLoaderReset(@NonNull Loader<HomePageStatus> loader) {
 
     }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        Log.d("控制页面生命周期","onPause()");
+//
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        Log.d("控制页面生命周期","onResume()");
+//
+//    }
+
+
 }

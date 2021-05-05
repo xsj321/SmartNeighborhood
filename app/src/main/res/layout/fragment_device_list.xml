@@ -9,6 +9,8 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/is_online"
+        android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_width="100dp"
         android:layout_height="5dp"

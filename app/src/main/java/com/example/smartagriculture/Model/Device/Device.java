@@ -11,12 +11,14 @@ public class Device implements Serializable {
     private String DeviceName;
     private String DeviceEvent;
     private JSONObject DeviceCom;
+    private boolean isOnline;
 
-    public Device(String deviceId, String deviceName, String deviceEvent , JSONObject deviceCom) {
+    public Device(String deviceId, String deviceName, String deviceEvent, JSONObject deviceCom, boolean isOnline) {
         DeviceId = deviceId;
         DeviceName = deviceName;
         DeviceEvent = deviceEvent;
         DeviceCom = deviceCom;
+        this.isOnline = isOnline;
     }
 
     @NonNull
@@ -59,5 +61,9 @@ public class Device implements Serializable {
 
     public void setDeviceCom(JSONObject deviceCom) {
         DeviceCom = deviceCom;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
     }
 }

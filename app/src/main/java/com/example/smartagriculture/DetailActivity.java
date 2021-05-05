@@ -12,15 +12,25 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.smartagriculture.Model.Device.Component;
+import com.example.smartagriculture.Util.DataRequestUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
 public class DetailActivity extends AppCompatActivity {
+    private DeviceDetailAdapter deviceDetailAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +74,68 @@ public class DetailActivity extends AppCompatActivity {
 
 //        Log.d("列表",componentList.get(1).getComponentName());
 
-        List<Component> testList = new ArrayList<>();
-        testList.add(new Component("温度","int","22"));
-        testList.add(new Component("湿度","int","32"));
-        testList.add(new Component("状态","boolean","true"));
-        DeviceDetailAdapter deviceDetailAdapter = new DeviceDetailAdapter(testList, this);
+        Observable.just("1").map(new Func1<String, JSONObject>() {
+            @Override
+            public JSONObject call(String s) {
+                String body = "{\n" +
+                        "\"account\":\"xsj321@outlook.com\"\n" +
+                        "}";
+                URL url = DataRequestUtil.makeUrl(getBaseContext(), DataRequestUtil.DEVICE_LIST_URL);
+                Log.v("请求的数据", body);
+                JSONObject requestByPost = DataRequestUtil.requestByPost(url, body);
+                return requestByPost;
+            }
+        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<JSONObject>() {
+            @Override
+            public void call(JSONObject jsonObject) {
 
-        RecyclerView deviceList  = findViewById(R.id.device_all_info);
-        deviceList.setLayoutManager(new GridLayoutManager(this,2));
-        deviceList.setAdapter(deviceDetailAdapter);
+                try {
+                    Log.d("JavaRXTest",jsonObject.toString() );
+                    ArrayList<Component> detailList = new ArrayList<>();
+                    JSONArray data = jsonObject.getJSONArray("data");
 
+                    for (int i =0;i<data.length() ;i++){
+                        JSONObject components = data.getJSONObject(i).getJSONObject("components");
+                        Iterator<String> keys = components.keys();
+                        while (keys.hasNext()){
+                            String name = keys.next();
+                            Log.d("获取到:",name);
+                            JSONObject component = components.getJSONObject(name);
+                            String type = component.getString("type");
+                            if (type.equals("int")){
+                                detailList.add(new Component(
+                                        component.getString("name"),
+                                        component.getString("type"),
+                                        component.getInt("value")
+                                        ));
+                            }
+                            if (type.equals("sting") ){
+                                detailList.add(new Component(
+                                        component.getString("name"),
+                                        component.getString("type"),
+                                        component.getString("value")
+                                ));
+                            }
+                            if (type.equals("boolean") ){
+                                detailList.add(new Component(
+                                        component.getString("name"),
+                                        component.getString("type"),
+                                        component.getBoolean("value")
+                                ));
+                            }
+
+                        }
+                    }
+
+                    deviceDetailAdapter = new DeviceDetailAdapter(detailList, getBaseContext());
+                    RecyclerView deviceList  = findViewById(R.id.device_all_info);
+                    deviceList.setLayoutManager(new GridLayoutManager(getBaseContext(),2));
+                    deviceList.setAdapter(deviceDetailAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
