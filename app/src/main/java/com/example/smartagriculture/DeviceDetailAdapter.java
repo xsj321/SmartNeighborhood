@@ -39,7 +39,12 @@ public class DeviceDetailAdapter extends RecyclerView.Adapter<DeviceDetailAdapte
         Log.d("当前组件数值",value);
 
         viewHolder.valueName.setText(componentName);
-        viewHolder.valueValue.setText(value);
+        if (value.equals("true")){
+            viewHolder.valueValue.setText("有车");
+        }else {
+            viewHolder.valueValue.setText("无车");
+        }
+
     }
 
     @Override

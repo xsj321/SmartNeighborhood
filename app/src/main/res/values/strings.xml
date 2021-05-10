@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">掌上园区管理</string>
+    <string name="app_name">智慧停车位</string>
     <!-- Strings related to login -->
     <string name="prompt_email">电子邮箱</string>
     <string name="prompt_password">密码</string>
@@ -64,8 +64,8 @@
     <string name="temperature">温度</string>
     <string name="humidity">湿度</string>
     <string name="air_smoke">烟雾浓度</string>
-    <string name="login_sub_title">掌上园区管理，省心更放心</string>
-    <string name="title_activity_detail">DetailActivity</string>
+    <string name="login_sub_title">SmartParking</string>
+    <string name="title_activity_detail">停车位状况</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

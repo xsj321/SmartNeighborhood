@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.smartagriculture.DetailActivity;
 import com.example.smartagriculture.View.Home.HomePage;
 import com.example.smartagriculture.R;
 
@@ -198,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this,HomePage.class);
+        Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
         finish();
     }
@@ -297,7 +298,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
      */
     void startMain(String UserName){
         Log.d("登录的用户为",UserName);
-        Intent intent = new Intent(this, HomePage.class);
+        Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra("user_name",UserName);
         startActivity(intent);
         finish();
