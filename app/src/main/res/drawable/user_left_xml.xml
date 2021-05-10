@@ -5,7 +5,7 @@
         </shape>
     </item>
     <item android:width="15dp" android:height="19dp">
-        <bitmap android:src="@drawable/mail">
+        <bitmap android:src="@drawable/login_left">
         </bitmap>
     </item>
 </layer-list>

@@ -30,7 +30,7 @@ public class PatrolDataActivity extends AppCompatActivity implements LoaderManag
     private SearchView mSearchView;
     private DataTable rootLayout;
     private String NowUserName;
-    public static final ArrayList<PatrolDataListItem> datlist =  new ArrayList<>();
+    private ArrayList<PatrolDataListItem> datlist =  new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,29 +50,18 @@ public class PatrolDataActivity extends AppCompatActivity implements LoaderManag
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//添加默认的返回图标
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setTitle(null);
-        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
+//        getSupportLoaderManager().initLoader(1,null,this).forceLoad();
+        datlist.clear();
+        {
+            datlist.add(new PatrolDataListItem("安保A", "2021/05/10", "09:30 A6 → 10:00 A7 → 11:30 C7 → 11:30 A8"));
+            datlist.add(new PatrolDataListItem("安保B", "2021/05/11", "09:30 A6 → 10:00 A7 → 11:30 C7 → 11:30 A8"));
+            datlist.add(new PatrolDataListItem("安保C", "2021/05/12", "09:30 A6 → 10:00 A7 → 11:30 C7 → 11:30 A8"));
 
-       /* {
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
-            datlist.add(new PatrolDataListItem("王敬则", "2020/02/10", "09:30幸福街道北门口巡更点 → 10:00  五普路街道巡更点 → 11:30商业北街北  门口巡更点 → 11:30商业"));
         }
         RecyclerView recyclerView = rootLayout.getListView();
         recyclerView.setAdapter(new PatrolDataAdapter(datlist));
         LinearLayout view= (LinearLayout)LayoutInflater.from(this).inflate(R.layout.patrol_data_list_header,null,false );
-        rootLayout.setHeader(view);*/
+        rootLayout.setHeader(view);
     }
 
     @Override
@@ -114,6 +103,13 @@ public class PatrolDataActivity extends AppCompatActivity implements LoaderManag
     private final void finshThis(){
         finish();
     }
+
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+////        finshThis();
+//    }
 
     @NonNull
     @Override
