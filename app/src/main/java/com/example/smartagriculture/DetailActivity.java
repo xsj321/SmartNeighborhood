@@ -31,6 +31,8 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
+import static java.lang.Thread.sleep;
+
 public class DetailActivity extends AppCompatActivity {
     private DeviceDetailAdapter deviceDetailAdapter;
 
@@ -79,8 +81,17 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+        update(false);
 //        Log.d("列表",componentList.get(1).getComponentName());
 
+
+//        deviceDetailAdapter = new DeviceDetailAdapter(componentList, getBaseContext());
+//        RecyclerView deviceList  = findViewById(R.id.device_all_info);
+//        deviceList.setLayoutManager(new GridLayoutManager(getBaseContext(),2));
+//        deviceList.setAdapter(deviceDetailAdapter);
+    }
+
+    private void update(final boolean isWait){
         Observable.just("1").map(new Func1<String, JSONObject>() {
             @Override
             public JSONObject call(String s) {
@@ -90,6 +101,13 @@ public class DetailActivity extends AppCompatActivity {
                 URL url = DataRequestUtil.makeUrl(getBaseContext(), DataRequestUtil.DEVICE_LIST_URL);
                 Log.v("请求的数据", body);
                 JSONObject requestByPost = DataRequestUtil.requestByPost(url, body);
+                try {
+                    if (isWait){
+                        sleep(2000);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 return requestByPost;
             }
         }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<JSONObject>() {
@@ -114,7 +132,7 @@ public class DetailActivity extends AppCompatActivity {
                                         component.getString("name"),
                                         component.getString("type"),
                                         component.getInt("value")
-                                        ));
+                                ));
                             }
                             if (type.equals("sting") ){
                                 detailList.add(new Component(
@@ -139,17 +157,15 @@ public class DetailActivity extends AppCompatActivity {
                     deviceList.setLayoutManager(new LinearLayoutManager(getBaseContext()));
                     deviceList.setAdapter(deviceDetailAdapter);
 
+                    update(true);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
 
-//        deviceDetailAdapter = new DeviceDetailAdapter(componentList, getBaseContext());
-//        RecyclerView deviceList  = findViewById(R.id.device_all_info);
-//        deviceList.setLayoutManager(new GridLayoutManager(getBaseContext(),2));
-//        deviceList.setAdapter(deviceDetailAdapter);
     }
+
     private static void setAndroidNativeLightStatusBar(Activity activity, boolean dark) {
         View decor = activity.getWindow().getDecorView();
         if (dark) {
