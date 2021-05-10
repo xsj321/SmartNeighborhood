@@ -34,7 +34,7 @@ public class HomePage extends AppCompatActivity {
 
 
 
-    private String[] titles = new String[]{"所有设备","警报","任务"};
+    private String[] titles = new String[]{"所有设备","警报"};
     private ArrayList<Fragment> fragments = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,8 @@ public class HomePage extends AppCompatActivity {
         fragments.add(new DeviceList());
         homeTab.addTab(homeTab.newTab());
         fragments.add(new ControlFragment());
-        homeTab.addTab(homeTab.newTab());
-        fragments.add(new DeviceList());
+//        homeTab.addTab(homeTab.newTab());
+//        fragments.add(new DeviceList());
 
 
 

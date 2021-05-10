@@ -46,12 +46,16 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(nowDevice.getDeviceId());
         holder.mContentView.setText(nowDevice.getDeviceName());
-        Log.d("在线状态！Q！！！！！！", String.valueOf(nowDevice.isOnline()));
+        Log.d("在线状态！！！！！！！", String.valueOf(nowDevice.isOnline()));
+
         if (!nowDevice.isOnline()){
             holder.onLine.setBackgroundColor(Color.parseColor("#EE3B3B"));
         }else {
             holder.onLine.setBackgroundColor(Color.parseColor("#039BE5"));
         }
+
+
+        Log.d("设备组件表：",nowDevice.getDeviceCom().toString());
 
         holder.itemRoot.setOnClickListener(new View.OnClickListener() {
             @Override
